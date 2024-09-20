@@ -45,23 +45,23 @@ class Register(View):
 		else:
 			return render(request, 'member/register.html')
 	def post(self, request):
-	    first_name = request.POST.get('first_name')
-	    second_name = request.POST.get('second_name')
-	    email = request.POST.get('email')
-	    phone_number = request.POST.get('phone_number')
-	    password = request.POST.get('password')
-	    password2 = request.POST.get('password2')
-	    if password != password2:
-	        messages.error(request, message='The passwords should be matching')
-	        return render(request, template_name='Member/register.html')
-	    else:
-	    	try:
-	    		user = Member.objects.create_user(first_name=first_name, second_name=second_name, email=email, phone_number=phone_number, password=password)
-	    		user.save()
-	    		return redirect(to='login')
-	    	except:
-	    		messages.error(request, message='Email already in the system')
-	    		return render(request, template_name='member/register.html')
+		first_name = request.POST.get('first_name')
+		second_name = request.POST.get('second_name')
+		email = request.POST.get('email')
+		phone_number = request.POST.get('phone_number')
+		password = request.POST.get('password')
+		password2 = request.POST.get('password2')
+		if password != password2:
+			messages.error(request, message='The passwords should be matching')
+			return render(request, template_name='Member/register.html')
+		else:
+			try:
+				user = Member.objects.create_user(first_name=first_name, second_name=second_name, email=email, phone_number=phone_number, password=password)
+				user.save()
+				return redirect(to='login')
+			except:
+				messages.error(request, message='Email already in the system')
+				return render(request, template_name='member/register.html')
 
 class Profile(View):
 	def get(self, request, pk):

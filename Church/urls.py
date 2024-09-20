@@ -18,8 +18,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from member.views import Home, About, History, Login, Register, Profile, ChurchGallery, Choirs, SpecificChoir, SundaySchool, Word, SermonPoints, CedGroups, SpecificCedGroup, PrayerCells
-from managment.views import Dashboard
+from member.views import *
+from managment.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,4 +40,5 @@ urlpatterns = [
     path('specific-cedgroup/<int:pk>/', SpecificCedGroup.as_view(), name='specific-cedgroup'),    
     path('prayer-cells/', PrayerCells.as_view(), name='prayer-cells'),
     path('dashboard/', Dashboard.as_view(), name='dashboard'),
+    path('create_sermon/', CreateSermon.as_view(), name='create_sermon'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

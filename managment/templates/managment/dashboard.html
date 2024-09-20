@@ -1,4 +1,18 @@
 {% extends 'managment/index.html' %} {% block content %}
+<div class="row justify-content-center mx-1">
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+  
+      <div class="text-center">{{message}}</div>
+    </div>
+    {% endfor %}
+  </div> 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -27,7 +41,7 @@
                         <th scope="row">{{member.id}}</th>
                         <td>{{member.first_name}}</td>
                         <td>{{member.second_name}}</td>
-                        <td>@{{member.email}}</td>
+                        <td>{{member.email}}</td>
                         <td>0{{member.phone_number}}</td>
                         <td>{{member.last_login}}</td>
                     </tr>
