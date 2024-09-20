@@ -1,0 +1,4 @@
+﻿django
+pillow
+whitenoise
+psycopg2-binary

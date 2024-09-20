@@ -1,0 +1,42 @@
+{% extends 'managment/index.html' %} {% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <p class="display-4 text-decoration-underline text-center">
+                Registered Members
+            </p>
+        </div>
+    </div> 
+    <div class="row justify-content-center mt-1">
+        <div class="table-responsive">
+            <table class="table p-3">
+                <thead>
+                    <tr class="table-active">
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone number</th>
+                        <th scope="col">Last seen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for member in members %}    
+                    <tr>
+                        <th scope="row">{{member.id}}</th>
+                        <td>{{member.first_name}}</td>
+                        <td>{{member.second_name}}</td>
+                        <td>@{{member.email}}</td>
+                        <td>0{{member.phone_number}}</td>
+                        <td>{{member.last_login}}</td>
+                    </tr>
+                    {% endfor %}
+                        
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
