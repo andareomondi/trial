@@ -80,15 +80,15 @@ WSGI_APPLICATION = 'Church.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
         # extarnal database
-        #  'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #  'NAME': 'railway',
-        #  'USER': 'postgres',
-        #  'PASSWORD': 'EFMKCXivcaEYnzPioSIvsAGFnRvLLGJe',
-        #  'HOST': 'viaduct.proxy.rlwy.net',
-        #  'PORT': '14365',
+          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'NAME': 'defaultdb',
+          'USER': 'avnadmin',
+          'PASSWORD': 'AVNS_0LcCTKr97Rci1pfCz8d',
+          'HOST': 'pg-2ef3c205-shadrackandare-6c25.l.aivencloud.com',
+          'PORT': '20469',
     }
 }
 
