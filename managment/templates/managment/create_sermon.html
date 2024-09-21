@@ -1,46 +1,75 @@
+{% extends 'managment/index.html' %}
 
-{% for message in messages %}
+{% block content %}
     
-<p>{{message}}</p>
-{% endfor %}
-    
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    <!-- Sermon form fields -->
-    <label>Image:</label>
-    <input type="file" name="image" required>
-    <br>
-    <label>Book:</label>
-    <input type="text" name="book" required>
-    <br>
-    <label>Verse:</label>
-    <input type="text" name="verse" required>
-    <br>
-    <label>Description:</label>
-    <textarea name="description" id="description"></textarea>
-    <br>
-    <!-- ... other sermon form fields ... -->
-
-    <!-- Point form fields -->
-    <label>Points:</label>
-    <div id="point-fields">
-        <input type="text" name="point_1" required>
-        <br>
+<div class="row justify-content-center mx-1">
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+  
+      <div class="text-center">{{message}}</div>
     </div>
-    <button type="button" id="add-point-btn">Add Point</button>
+    {% endfor %}
+</div> 
+    
+<div class="container">
+    <div class="row justify-content-center mt-1 p-2">
+        <div class="col col-sm-8 col-md-6 col-lg-6">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="formFileSm" class="form-label">Image</label>
+                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="image" aria-describedby="imagehelp">
+                    <div id="imagehelp" class="form-text">Here enter a relevant image to the sermon.</div>
+                </div>
 
-    <script>
-        let pointCount = 1;
-        document.getElementById('add-point-btn').addEventListener('click', function() {
-            const pointField = document.createElement('input');
-            pointField.type = 'text';
-            pointField.name = `point_${pointCount + 1}`;
-            pointField.required = true;
-            document.getElementById('point-fields').appendChild(pointField);
-            pointCount++;
-        });
-    </script>
+                <div class="mb-3">
+                    <label for="book" class="form-label">Book</label>
+                    <input type="text" class="form-control" id="book" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">Here specify the book and the verse eg (John 3:16).</div>
+                </div>
+                <div class="mb-3">
+                    <label for="verse" class="form-label">Verser</label>
+                    <input type="text" class="form-control" id="verse" aria-describedby="verseHelp">
+                    <div id="verseHelp" class="form-text">The Bible Verse itself</div>
+                </div>
 
-    <button type="submit">Create Sermon</button>
-</form>
+                <div class="mb-3">
+                    <label for="Description" class="form-label">Description</label>
+                    <textarea class="form-control" id="Description" rows="3" aria-describedby="descriptionhelp"></textarea>
+                    <div id="descriptionhelp" class="form-text">Here give a description  of the sermon</div>
+
+                </div>
+                <!-- Point form fields -->
+                <label class="form-label">Key points</label>
+                <div id="point-fields">
+                    <div class="mb-3">
+                        <input type="text" class="form-control"  placeholder="Your points">
+                    </div>
+                </div>
+                <button type="button" id="add-point-btn" class="btn btn-success">Add Point</button>
+            
+                <script>
+                    let pointCount = 1;
+                    document.getElementById('add-point-btn').addEventListener('click', function() {
+                        const pointField = document.createElement('input');
+                        pointField.type = 'text';
+                        pointField.name = `point_${pointCount + 1}`;
+                        pointField.required = true;
+                        document.getElementById('point-fields').appendChild(pointField);
+                        pointCount++;
+                    });
+                </script>
+            
+                <button type="submit" class="btn btn-primary">Create Sermon</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    
