@@ -128,3 +128,9 @@ class CedPracticeDay(models.Model):
     day = models.IntegerField(choices=DAYS_OF_THE_WEEK, null=True, blank=True)
     start = models.TimeField()
     stop = models.TimeField()
+
+class Video(models.Model):
+    video = models.FileField(upload_to='videos')
+    title = models.CharField(max_length=255)
+    def __str__(self):
+        return self.title

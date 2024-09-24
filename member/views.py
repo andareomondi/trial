@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Member, ChurchImage, Choir, ChoirImage, Sermon, CedGroup, CedPracticeDay
+from .models import *
 # Create your views here.
 class Home(View):
 	def get(self, request):
@@ -77,9 +77,11 @@ class ChurchGallery(View):
 	def get(self, request):
 		if request.user.is_authenticated:
 			images = ChurchImage.objects.all()
+			videos = Video.objects.all()
 			context = {
 				'images': images,
-			}
+				'videos': videos,
+		}
 			return render(request, 'member/churchpictures.html', context=context)
 		else:
 			return redirect(to='login')
