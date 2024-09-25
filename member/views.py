@@ -53,7 +53,7 @@ class Register(View):
 		password2 = request.POST.get('password2')
 		if password != password2:
 			messages.error(request, message='The passwords should be matching')
-			return render(request, template_name='Member/register.html')
+			return render(request, template_name='member/register.html')
 		else:
 			try:
 				user = Member.objects.create_user(first_name=first_name, second_name=second_name, email=email, phone_number=phone_number, password=password)
