@@ -33,7 +33,7 @@ class Login(View):
 			return redirect(to="home")
 		else:
 			messages.error(request, message="Wrong details provided")
-			return render(request, "Member/login.html")
+			return render(request, "member/login.html")
 
 def sign_out(request):
 	logout(request)
