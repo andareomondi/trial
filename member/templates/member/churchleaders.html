@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Church Leaders</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            rel="stylesheet">
+        <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .leader-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .leader-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+        .leader-img {
+            transition: filter 0.3s ease-in-out;
+        }
+        .leader-card:hover .leader-img {
+            filter: brightness(1.2);
+        }
+    </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center"
+                    href="{% url 'home' %}"><span>AIC
+                        Macedonia</span></a><button data-bs-toggle="collapse"
+                    class="navbar-toggler" data-bs-target="#navcol-5"><span
+                        class="visually-hidden">Toggle navigation</span><span
+                        class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-5">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{% url 'word' %}">Sermons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cedgroups' %}">CED
+                                groups</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{% url 'sunday-school' %}">Sunday
+                                School</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{% url 'choirs' %}">Choirs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{% url 'churchgallery' %}">Church
+                                Gallery</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container py-5">
+            <h1
+                class="text-center mb-5 animate__animated animate__fadeInDown">Our
+                Church Leaders</h1>
+
+            {% for leader in leaders %}
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div class="col animate__animated animate__fadeInUp">
+                    <div class="card bg-dark text-white leader-card">
+                        <img src="{{leader.profile_pic.url}}"
+                            class="card-img-top leader-img" alt="Leader 1">
+                        <div class="card-body">
+                            <h5 class="card-title">{{leader.name}}</h5>
+                            <p class="card-text">Department:
+                                {{leader.department}}</p>
+                            <p class="card-text">Role:
+                                {{leader.specification}}</p>
+                            <p class="card-text">Phone: 0{{leader.number}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

@@ -41,4 +41,5 @@ urlpatterns = [
     path('prayer-cells/', PrayerCells.as_view(), name='prayer-cells'),
     path('dashboard/', Dashboard.as_view(), name='dashboard'),
     path('create_sermon/', CreateSermon.as_view(), name='create_sermon'),
+    path('churchleaders', ChurchLeaders.as_view(), name='churchleaders')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

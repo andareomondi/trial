@@ -164,3 +164,10 @@ class PrayerCells(View):
 		name = request.POST.get('name')
 		messages.success(request, message=f'Hi {name}, your issue has been recieved and it is being worked upon')
 		return render(request, 'member/prayercells.html')
+class ChurchLeaders(View):
+	def get(self, request):
+		leaders = ChurchLeader.objects.all()
+		context = {
+			'leaders': leaders,
+		}
+		return render(request, 'member/churchleaders.html', context=context)

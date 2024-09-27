@@ -134,3 +134,11 @@ class Video(models.Model):
     title = models.CharField(max_length=255)
     def __str__(self):
         return self.title
+class ChurchLeader(models.Model):
+    name = models.CharField(max_length=255)
+    number = models.IntegerField()
+    profile_pic = models.ImageField(upload_to='leader-profile-pics')
+    department = models.CharField(max_length=255)
+    specification = models.CharField(max_length=255, default='Head of Department')
+    def __str__(self):
+        return self.name
