@@ -22,11 +22,6 @@
         <div class="col col-sm-8 col-md-6 col-lg-6">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="mb-3">
-                    <label for="formFileSm" class="form-label">Image</label>
-                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="image" aria-describedby="imagehelp">
-                    <div id="imagehelp" class="form-text">Here enter a relevant image to the sermon.</div>
-                </div>
 
                 <div class="mb-3">
                     <label for="book" class="form-label">Book</label>
@@ -45,28 +40,8 @@
                     <div id="descriptionhelp" class="form-text">Here give a description  of the sermon</div>
 
                 </div>
-                <!-- Point form fields -->
-                <label class="form-label">Key points</label>
-                <div id="point-fields">
-                    <div class="mb-3">
-                        <input type="text" class="form-control"  placeholder="Your points">
-                    </div>
-                </div>
-                <button type="button" id="add-point-btn" class="btn btn-success">Add Point</button>
             
-                <script>
-                    let pointCount = 1;
-                    document.getElementById('add-point-btn').addEventListener('click', function() {
-                        const pointField = document.createElement('input');
-                        pointField.type = 'text';
-                        pointField.name = `point_${pointCount + 1}`;
-                        pointField.required = true;
-                        document.getElementById('point-fields').appendChild(pointField);
-                        pointCount++;
-                    });
-                </script>
-            
-                <button type="submit" class="btn btn-primary">Create Sermon</button>
+                <button type="submit" class="btn btn-primary">Send Sermon</button>
             </form>
         </div>
     </div>

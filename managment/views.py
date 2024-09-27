@@ -18,25 +18,26 @@ class CreateSermon(View):
         return render(request, template_name='managment/create_sermon.html')
 
     def post(self, request):
-        sermon = Sermon(
-            image=request.FILES['image'],
-            book=request.POST['book'],
-            verse=request.POST['verse'],
-            description=request.POST['description']
-        )
-        sermon.save()
+        from twilio.rest import Client
+        book=request.POST['book']
+        verse=request.POST['verse']
+        description = request.POST['description']
+        members = Member.objects.all()
+        for member in members:
+            print(member.phone_number)
+            try:
+                account_sid = 'AC565bc45825da07a5157ba5ef0f867928'
+                auth_token = '029d1ec8b2e63fe7fefcd0d9d86f0734'
+                client = Client(account_sid, auth_token)
 
-        # Get the list of point fields from the request.POST dictionary
-        point_fields = [key for key in request.POST.keys() if key.startswith('point_')]
-        description_fields = [key for key in request.POST.keys() if key.startswith('description_')]
+                message = client.messages.create(
+                from_='whatsapp:+14155238886',
+                body=f'The message for today comes from the book of  {book} verse {verse}.\n--------Description------\n{description}',
+                to=f'whatsapp:+254{member.phone_number}'
+                )
 
-        # Create multiple Point instances associated with the sermon
-        for i, point_field in enumerate(point_fields):
-            point = Point(
-                word=sermon,
-                point=request.POST[point_field],
-            )
-            point.save()
-        messages.success(request, message='The sermon has been added successfully')
+            except:
+                pass
+        messages.success(request, message='The sermon has been sent successfully')
         return render(request,  template_name='managment/create_sermon.html')
 
