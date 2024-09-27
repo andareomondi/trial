@@ -27,7 +27,7 @@ class CreateSermon(View):
             print(member.phone_number)
             try:
                 account_sid = 'AC565bc45825da07a5157ba5ef0f867928'
-                auth_token = '029d1ec8b2e63fe7fefcd0d9d86f0734'
+                auth_token = '1def00172e44b6b0deb3e23217cebc30'
                 client = Client(account_sid, auth_token)
 
                 message = client.messages.create(
