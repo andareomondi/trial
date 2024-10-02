@@ -3,190 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Profile Template</title>
+    <title>Church Member Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #1a1a2e;
-            --text-color: #e0e0e0;
-            --accent-color: #0f3460;
-            --secondary-color: #16213e;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
+            background-color: #121212;
+            color: #e0e0e0;
             font-family: 'Arial', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        .profile-card {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 2rem;
+            margin-top: 3rem;
         }
 
-        .profile {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
+        .profile-image {
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
 
-        .profile-pic {
+        .profile-image img {
             width: 200px;
             height: 200px;
-            border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--accent-color);
+            border: 4px solid #bb86fc;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(187, 134, 252, 0.3);
         }
 
-        .profile-info {
-            text-align: center;
-        }
-
-        .profile-name {
+        .member-name {
+            color: #bb86fc;
             font-size: 2.5rem;
+            font-weight: bold;
             margin-bottom: 0.5rem;
         }
 
-        .profile-bio {
-            font-size: 1.1rem;
-            color: #b0b0b0;
+        .member-role {
+            font-size: 1.2rem;
+            color: #03dac6;
+            margin-bottom: 1.5rem;
         }
 
-        .update-form {
-            background-color: var(--secondary-color);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-top: 2rem;
-        }
-
-        .form-group {
+        .member-info p {
             margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
+        .member-info i {
+            width: 25px;
+            color: #bb86fc;
+            margin-right: 10px;
         }
 
-        input, textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid var(--accent-color);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: var(--accent-color);
-            color: var(--text-color);
+        .btn-edit {
+            background-color: #bb86fc;
             border: none;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            color: #121212;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
 
-        button:hover {
-            background-color: #16213e;
+        .btn-edit:hover {
+            background-color: #03dac6;
+            color: #121212;
         }
 
-        @media (min-width: 768px) {
-            .profile {
-                flex-direction: row;
-                justify-content: center;
-                text-align: left;
-            }
+        .form-control {
+            background-color: #2e2e2e;
+            border: 1px solid #bb86fc;
+            color: #e0e0e0;
+        }
 
-            .profile-info {
-                text-align: left;
-            }
+        .form-control:focus {
+            background-color: #2e2e2e;
+            border-color: #03dac6;
+            color: #e0e0e0;
+            box-shadow: 0 0 0 0.2rem rgba(3, 218, 198, 0.25);
         }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}"><span>AIC Macedonia</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navcol-5">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'word' %}">Sermons</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'cedgroups' %}">CED groups</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'sunday-school' %}">Sunday School</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'choirs' %}">Choirs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'churchgallery' %}">Church Gallery</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}">About us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     <div class="container">
-        <div class="profile">
-            <img src="" alt="Profile Picture" class="profile-pic" id="profilePic">
-            <div class="profile-info">
-                <h1 class="profile-name" id="profileName">John Doe</h1>
-                <p class="profile-bio" id="profileBio">Web Developer & Designer</p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="profile-card">
+                    <div class="profile-image">
+                        <img src="{{user.profile_pic.url}}" alt="Church Member" class="img-fluid">
+                    </div>
+                    <h1 class="member-name text-center">{{user.first_name}} {{user.second_name}}</h1>
+                    <p class="member-role text-center">Member</p>
+                    <div class="member-info">
+                        <p><i class="fas fa-envelope"></i> <span id="email">{{user.email}}</span></p>
+                        <p><i class="fas fa-phone"></i> <span id="phone">0{{user.phone_number}}</span></p>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-edit btn-lg" id="editProfileBtn">Get started</button>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <form class="update-form" id="updateForm">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="bio">Bio:</label>
-                <textarea id="bio" name="bio" rows="3" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="picture">Profile Picture URL:</label>
-                <input type="url" id="picture" name="picture">
-            </div>
-            <button type="submit">Update Profile</button>
-        </form>
     </div>
 
-    <!-- <script>
-        const defaultProfilePic = 'https://via.placeholder.com/200x200.png?text=Profile+Picture';
-        const profilePic = document.getElementById('profilePic');
-        const profileName = document.getElementById('profileName');
-        const profileBio = document.getElementById('profileBio');
-        const updateForm = document.getElementById('updateForm');
-
-        // Set default profile picture
-        profilePic.src = defaultProfilePic;
-
-        // Load profile data from localStorage
-        function loadProfile() {
-            const savedName = localStorage.getItem('profileName');
-            const savedBio = localStorage.getItem('profileBio');
-            const savedPicture = localStorage.getItem('profilePicture');
-
-            if (savedName) profileName.textContent = savedName;
-            if (savedBio) profileBio.textContent = savedBio;
-            if (savedPicture) profilePic.src = savedPicture;
-        }
-
-        // Update profile
-        updateForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const bio = document.getElementById('bio').value;
-            const picture = document.getElementById('picture').value;
-
-            profileName.textContent = name;
-            profileBio.textContent = bio;
-            if (picture) {
-                profilePic.src = picture;
-            } else {
-                profilePic.src = defaultProfilePic;
-            }
-
-            // Save to localStorage
-            localStorage.setItem('profileName', name);
-            localStorage.setItem('profileBio', bio);
-            localStorage.setItem('profilePicture', picture || defaultProfilePic);
-
-            updateForm.reset();
-        });
-
-        // Load profile data on page load
-        loadProfile();
-    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
