@@ -114,6 +114,8 @@ class SundaySchool(View):
 	def get(self, request):
 		if request.user.is_authenticated:
 			return render(request, 'member/sundayschool.html')
+		else:
+			return redirect(to='login')
 class Word(View):
 	def get(self, request):
 		words = Sermon.objects.all()
