@@ -20,35 +20,44 @@
                 Registered Members
             </p>
         </div>
-    </div> 
+    </div>
+     
     <div class="row justify-content-center mt-1">
         <div class="table-responsive">
-            <table class="table p-3">
-                <thead>
-                    <tr class="table-active">
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone number</th>
-                        <th scope="col">Last seen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    {% for member in members %}    
-                    <tr>
-                        <th scope="row">{{member.id}}</th>
-                        <td>{{member.first_name}}</td>
-                        <td>{{member.second_name}}</td>
-                        <td>{{member.email}}</td>
-                        <td>0{{member.phone_number}}</td>
-                        <td>{{member.last_login}}</td>
-                    </tr>
-                    {% endfor %}
-                        
-                </tbody>
-            </table>
+            <form method="post">
+                {% csrf_token %}
+                <table class="table p-3">
+                    <thead>
+                        <tr class="table-active">
+                            <th scope="col">Memmber id</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone number</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                        {% for member in members %}
+                        <tr>
+                            <th scope="row">{{member.id}}</th>
+                            <td>{{member.first_name}}</td>
+                            <td>{{member.second_name}}</td>
+                            <td>{{member.email}}</td>
+                            <td>0{{member.phone_number}}</td>
+                            <td><button value="{{member.id}}" type="submit" class="btn btn-danger" name="id" id="id">Delete</button></td>
+                        </tr>
+                        {% endfor %}
+                
+                    </tbody>
+                </table>
+            </form>
+            <div class="row justify-content-center mt-2">
+                <div class="col-sm-10 col-md-8 text-center">
+                    <p class="display-6">Total Members = {{memberscount}}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

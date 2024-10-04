@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="{% static 'assets/css/b.css' %}">
+    <style>
+      a {
+          text-decoration: none;
+          color: inherit; /* or specify a color of your choice */
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
@@ -42,11 +48,6 @@
                   <li class="nav-item">
                     <a href="{% url 'dashboard' %}" class="nav-link" aria-current="page">
                       Members
-                    </a>
-                  </li>
-                  <li>
-                    <a href="{% url 'create_sermon' %}" class="nav-link">
-                        Sermons
                     </a>
                   </li>
                 </ul>
