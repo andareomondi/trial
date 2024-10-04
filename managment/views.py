@@ -14,6 +14,7 @@ class Dashboard(View):
             }
             return render(request, 'managment/dashboard.html', context=context)
         else:
+            messages.success(request, 'Hi please login as admin to access that page')
             return redirect(to='login')
     def post(self, request):
         member_id = request.POST.get('id')
