@@ -27,13 +27,18 @@ class Login(View):
 	def post(self, request):
 		email = request.POST.get('email')
 		password = request.POST.get('password')
-		member = authenticate(email=email, password=password)
-		if member is not None:
-			login(request, member)
-			return redirect(to="home")
-		else:
-			messages.error(request, message="Wrong details provided")
+		member = Member.objects.filter(email=email).first()
+		if member is None:
+			messages.error(request, message="Email not found in the system")
 			return render(request, "member/login.html")
+		else:
+			member = authenticate(email=email, password=password)
+			if member is not None:
+				login(request, member)
+				return redirect(to="home")
+			else:
+				messages.error(request, message="Incorrect password")
+				return render(request, "member/login.html")
 
 def sign_out(request):
 	logout(request)
