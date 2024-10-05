@@ -98,6 +98,17 @@
     <link rel="stylesheet" href="{% static 'assets/css/Simple-Slider-swiper-bundle.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Simple-Slider.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/Team-Horizontal-images.css' %}">
+    <style>
+        /* Remove arrows from number input */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+    <!-- Add these to your <head> section -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -123,84 +134,98 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <div class="row justify-content-center mt-3"><div class="col-md-7 text-center">
-      <form method="POST" class="was-validated mb-4">
-        {% csrf_token %}
-        <div class="row justify-content-center mx-1">
-          {% for message in messages %}
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-        
-            <div class="text-center">{{message}}</div>
-          </div>
-          {% endfor %}
-        </div>
-        <!-- Name input -->
-        <div data-mdb-input-init class="form-floating mb-1">
-          <input type="text" id="registerFirstName" class="form-control" name="first_name" required placeholder="faiji">
-          <label class="form-label" for="registerFirstName">First Name</label>
-          <div class="valid-feedback">Looking good</div>
-        </div>
-
-        <div data-mdb-input-init class="form-floating mb-1">
-          <input type="text" id="registerSecondName" class="form-control" name="second_name" required placeholder="kjsdj">
-          <label class="form-label" for="registerSecondName">Second Name</label>
-          <div class="valid-feedback">looks good!</div>
-        </div>
-  
-        <!-- Email input -->
-        <div data-mdb-input-init class="form-floating mb-1">
-          <input type="email" id="registerEmail" class="form-control" name="email" required placeholder="akjf">
-          <label class="form-label" for="registerEmail">Email</label>
-          <div class="valid-feedback">Looking good!</div>
-        </div>
-
-        <div data-mdb-input-init class="form-floating mb-1">
-            <input type="number" id="phone_number" class="form-control" name="phone_number" required placeholder="akjf">
-            <label class="form-label" for="phone_number">Phone Number</label>
-            <div class="valid-feedback">Thank You :) </div>
-          </div>  
-        <!-- Password input -->
-        <div data-mdb-input-init class="form-floating mb-1">
-          <input type="password" id="registerPassword" class="form-control" name="password" required placeholder="kjfkjs">
-          <label class="form-label" for="registerPassword">Password</label>
-          <div class="valid-feedback">You sure that's safe?</div>
-        </div>
-  
-        <!-- Repeat Password input -->
-        <div data-mdb-input-init class="form-floating mb-1">
-          <input type="password" id="registerRepeatPassword" class="form-control" name="password2" required placeholder="kfdjj">
-          <label class="form-label" for="registerRepeatPassword">Repeat password</label>
-          <div class="valid-feedback">You reallllly sure????</div>
-        </div>
-`  
-        <!-- Submit button -->
+    <div class="container py-5">
         <div class="row justify-content-center">
-          <div class="text-center">
-            <button type="submit" class="btn btn-success btn-block mb-4">Sign Up</button>
-          </div>
-        </div>
-  
-        <!-- Register buttons -->
-        <div class="text-center">
-          <p mb-4>Already a member? <a href="{% url 'login' %}">Login</a></p>
-        </div>
-      </form>
-    </div>
-  </div>
-  <!-- Pills content -->
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg animate__animated animate__fadeInUp">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4 animate__animated animate__bounceIn">Sign Up</h2>
+                        <form method="POST" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            
+                            {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
 
-    </div>
-  </div>
-    </div>
-</div>
-</div></div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="registerFirstName" name="first_name" required placeholder="First Name">
+                                        <label for="registerFirstName">First Name</label>
+                                        <div class="invalid-feedback">Please enter your first name.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="registerSecondName" name="second_name" required placeholder="Second Name">
+                                        <label for="registerSecondName">Second Name</label>
+                                        <div class="invalid-feedback">Please enter your second name.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="registerEmail" name="email" required placeholder="Email">
+                                    <label for="registerEmail">Email</label>
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <input type="tel" class="form-control" id="phone_number" name="phone_number" required placeholder="Phone Number">
+                                    <label for="phone_number">Phone Number</label>
+                                    <div class="invalid-feedback">Please enter a valid phone number.</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 position-relative">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="registerPassword" name="password" required placeholder="Password">
+                                    <label for="registerPassword">Password</label>
+                                </div>
+                                <span class="password-toggle-icon position-absolute top-50 end-0 translate-middle-y pe-3">
+                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="registerRepeatPassword" name="password2" required placeholder="Repeat Password">
+                                    <label for="registerRepeatPassword">Repeat Password</label>
+                                    <div class="invalid-feedback">Passwords do not match.</div>
+                                </div>
+                            </div>
+
+                            <div id="passwordStrength" class="mb-3">
+                                <p class="mb-2 fw-bold">Password must contain:</p>
+                                <ul class="list-unstyled">
+                                    <li id="length"><i class="bi"></i> <small>At least 8 characters</small></li>
+                                    <li id="uppercase"><i class="bi"></i> <small>At least one uppercase letter</small></li>
+                                    <li id="lowercase"><i class="bi"></i> <small>At least one lowercase letter</small></li>
+                                    <li id="number"><i class="bi"></i> <small>At least one number</small></li>
+                                    <li id="special"><i class="bi"></i> <small>At least one special character</small></li>
+                                </ul>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg animate__animated animate__pulse animate__infinite">
+                                    <i class="bi bi-person-plus-fill me-2"></i>Sign Up
+                                </button>
+                            </div>
+
+                            <div class="text-center mt-3">
+                                <p>Already a member? <a href="{% url 'login' %}" class="btn-link">Login</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <footer class="text-center">
         <div class="container text-muted py-4 py-lg-5">
@@ -213,6 +238,199 @@
     <script src="{% static 'assets/js/Lightbox-Gallery.js' %}"></script>
     <script src="{% static 'assets/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
     <script src="{% static 'assets/js/Simple-Slider.js' %}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordInput = document.getElementById('registerPassword');
+        const repeatPasswordInput = document.getElementById('registerRepeatPassword');
+        const signUpButton = document.querySelector('button[type="submit"]');
+        const form = document.querySelector('form');
+        const strengthIndicators = {
+            length: document.getElementById('length'),
+            uppercase: document.getElementById('uppercase'),
+            lowercase: document.getElementById('lowercase'),
+            number: document.getElementById('number'),
+            special: document.getElementById('special')
+        };
+
+        function checkPasswordStrength(password) {
+            const minLength = 8;
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumbers = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+            updateStrengthIndicators({
+                length: password.length >= minLength,
+                uppercase: hasUpperCase,
+                lowercase: hasLowerCase,
+                number: hasNumbers,
+                special: hasSpecialChar
+            });
+
+            return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar;
+        }
+
+        function updateStrengthIndicators(conditions) {
+            for (const [key, met] of Object.entries(conditions)) {
+                const icon = strengthIndicators[key].querySelector('i');
+                icon.className = met ? 'bi bi-check-circle-fill text-success' : 'bi bi-x-circle-fill text-danger';
+                strengthIndicators[key].classList.toggle('text-muted', !met);
+                strengthIndicators[key].classList.toggle('fw-bold', met);
+            }
+        }
+
+        function updateButtonState() {
+            const password = passwordInput.value;
+            const repeatPassword = repeatPasswordInput.value;
+            const isStrong = checkPasswordStrength(password);
+            const passwordsMatch = password === repeatPassword;
+
+            signUpButton.disabled = !(isStrong && passwordsMatch && form.checkValidity());
+            
+            // Update repeat password validation
+            if (repeatPassword) {
+                repeatPasswordInput.setCustomValidity(passwordsMatch ? '' : 'Passwords do not match');
+            }
+        }
+
+        passwordInput.addEventListener('input', updateButtonState);
+        repeatPasswordInput.addEventListener('input', updateButtonState);
+        form.addEventListener('change', updateButtonState);
+
+        // Bootstrap form validation
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+                form.classList.add('shake');
+                setTimeout(() => form.classList.remove('shake'), 820);
+            }
+            form.classList.add('was-validated');
+        }, false);
+
+        // Initial button state and strength indicator
+        updateButtonState();
+
+        // Password visibility toggle
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#registerPassword');
+
+        togglePassword.addEventListener('click', function (e) {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
+
+        // Animated label for form inputs
+        const formFloatingInputs = document.querySelectorAll('.form-floating input');
+        formFloatingInputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('input-focused');
+            });
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.parentElement.classList.remove('input-focused');
+                }
+            });
+        });
+
+        // Progress bar for form completion
+        const progressBar = document.createElement('div');
+        progressBar.className = 'progress mb-3';
+        progressBar.innerHTML = '<div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>';
+        form.insertBefore(progressBar, form.firstChild);
+
+        function updateProgress() {
+            const inputs = form.querySelectorAll('input[required]');
+            const filledInputs = Array.from(inputs).filter(input => input.value.trim() !== '');
+            const progress = (filledInputs.length / inputs.length) * 100;
+            const progressBarInner = progressBar.querySelector('.progress-bar');
+            progressBarInner.style.width = `${progress}%`;
+            progressBarInner.setAttribute('aria-valuenow', progress);
+        }
+
+        form.addEventListener('input', updateProgress);
+    });
+    </script>
+    <style>
+    /* Custom styles for light/dark mode compatibility */
+    body {
+        transition: background-color 0.3s, color 0.3s;
+    }
+    
+    [data-bs-theme="light"] {
+        --bs-body-bg: #f8f9fa;
+        --bs-body-color: #212529;
+        --bs-card-bg: #ffffff;
+    }
+    
+    [data-bs-theme="dark"] {
+        --bs-body-bg: #212529;
+        --bs-body-color: #f8f9fa;
+        --bs-card-bg: #343a40;
+    }
+
+    .card {
+        background-color: var(--bs-card-bg);
+    }
+
+    .form-control {
+        background-color: var(--bs-body-bg);
+        color: var(--bs-body-color);
+    }
+
+    .form-control:focus {
+        background-color: var(--bs-body-bg);
+        color: var(--bs-body-color);
+    }
+
+    .form-floating label {
+        color: var(--bs-body-color);
+    }
+
+    .animate__animated {
+        animation-duration: 0.5s;
+    }
+
+    .password-toggle-icon {
+        cursor: pointer;
+    }
+
+    .form-floating.input-focused label {
+        color: var(--bs-primary);
+    }
+
+    .progress {
+        height: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .progress-bar {
+        transition: width 0.5s ease-in-out;
+    }
+
+    .btn-link {
+        text-decoration: none;
+        color: var(--bs-primary);
+        transition: color 0.3s ease;
+    }
+
+    .btn-link:hover {
+        color: var(--bs-primary-dark);
+        text-decoration: underline;
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+
+    .shake {
+        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    </style>
 </body>
 
 </html>
