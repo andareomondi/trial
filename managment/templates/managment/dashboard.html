@@ -29,7 +29,6 @@
                 <table class="table p-3">
                     <thead>
                         <tr class="table-active">
-                            <th scope="col">Memmber id</th>
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
                             <th scope="col">Email</th>
@@ -41,7 +40,6 @@
                 
                         {% for member in members %}
                         <tr>
-                            <th scope="row">{{member.id}}</th>
                             <td>{{member.first_name}}</td>
                             <td>{{member.second_name}}</td>
                             <td>{{member.email}}</td>
