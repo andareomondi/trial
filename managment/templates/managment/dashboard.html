@@ -2,17 +2,16 @@
 <div class="row justify-content-center mx-1">
     {% for message in messages %}
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="alert"
-        aria-label="Close"
-      ></button>
-  
-      <div class="text-center">{{message}}</div>
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"></button>
+
+        <div class="text-center">{{message}}</div>
     </div>
     {% endfor %}
-  </div> 
+</div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -21,7 +20,7 @@
             </p>
         </div>
     </div>
-     
+
     <div class="row justify-content-center mt-1">
         <div class="table-responsive">
             <form method="post">
@@ -38,58 +37,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                
+
                         {% for member in members %}
                         <tr>
                             <td>{{member.first_name}}</td>
                             <td>{{member.second_name}}</td>
                             <td>{{member.email}}</td>
                             <td>0{{member.phone_number}}</td>
-                            <td><button     type="button"
-                                class="btn btn-danger"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modalId">Delete</button></td>
-                            <td><a class="btn btn-success" href="https://wa.me/254{{member.phone_number}}">Message</a></td>
-                            <div
-                            class="modal fade"
-                            id="modalId"
-                            tabindex="-1"
-                            role="dialog"
-                            aria-labelledby="modalTitleId"
-                            aria-hidden="true"
-                        >
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalTitleId">
-                                            Delete member
-                                        </h5>
-                                        <button
-                                            type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"
-                                        ></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="container-fluid">Are you sure you want to delete the member's account?</div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button
-                                            type="button"
-                                            class="btn btn-secondary"
-                                            data-bs-dismiss="modal"
-                                        >
-                                            Close
-                                        </button>
-                                        <button value="{{member.id}}" type="submit" class="btn btn-success" name="id" id="id" >Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <td><button value="{{member.id}}" type="submit"
+                                    class="btn btn-danger" name="id" id="id"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalId">Delete</button></td>
+                            <td><a class="btn btn-success"
+                                    href="https://wa.me/254{{member.phone_number}}">Message</a></td>
                         </tr>
                         {% endfor %}
-                
+
                     </tbody>
                 </table>
             </form>
@@ -101,8 +64,44 @@
         </div>
     </div>
 </div>
+<!-- Button trigger modal -->
 
-
+<!-- Modal -->
+<div
+    class="modal fade"
+    id="modalId"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalTitleId"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">
+                    Delete member
+                </h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">Are you sure you want to delete the
+                    member's account?</div>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var modalId = document.getElementById('modalId');
@@ -116,6 +115,5 @@
         // Use above variables to manipulate the DOM
     });
 </script>
-
 
 {% endblock content %}
