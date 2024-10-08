@@ -45,6 +45,7 @@
                             <td>{{member.email}}</td>
                             <td>0{{member.phone_number}}</td>
                             <td><button value="{{member.id}}" type="submit" class="btn btn-danger" name="id" id="id">Delete</button></td>
+                            <td><a class="btn btn-success" href="https://wa.me/0{{member.phone_number}}">Message</a></td>
                         </tr>
                         {% endfor %}
                 
