@@ -13,8 +13,9 @@ class Dashboard(View):
                 'memberscount': memberscount,
             }
             return render(request, 'managment/dashboard.html', context=context)
+        elif request.user.is_authenticated:
+            return redirect(to='home')
         else:
-            messages.success(request, 'Hi please login as admin to access that page')
             return redirect(to='login')
     def post(self, request):
         member_id = request.POST.get('id')
