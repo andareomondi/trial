@@ -12,17 +12,18 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z+y35_&od9=)j1hwu*q-7$&hv$9&sa4ut5x=px#gl^c6ps5ult'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,12 +85,12 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         # extarnal database
-          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-          'NAME': 'defaultdb',
-          'USER': 'avnadmin',
-          'PASSWORD': 'AVNS_0LcCTKr97Rci1pfCz8d',
-          'HOST': 'pg-2ef3c205-shadrackandare-6c25.l.aivencloud.com',
-          'PORT': '20469',
+          'ENGINE': os.environ.get('ENGINE'),
+          'NAME': os.environ.get('NAME'),
+          'USER': os.environ.get('USER'),
+          'PASSWORD': os.environ.get('PASSWORD'),
+          'HOST': os.environ.get('HOST'),
+          'PORT': os.environ.get('PORT'),
     }
 }
 

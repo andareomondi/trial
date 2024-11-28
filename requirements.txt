@@ -2,4 +2,4 @@
 pillow
 whitenoise
 psycopg2-binary
-twilio
+python-dotenv
