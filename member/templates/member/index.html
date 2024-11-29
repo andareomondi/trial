@@ -23,7 +23,7 @@ Home
                 <li class="nav-item text-center">
                     <a class="nav-link active" href="#">
                         <i class="bi bi-grid-fill category-icon"></i>
-                        ALL
+                        HOME
                     </a>
                 </li>
                 <li class="nav-item text-center">
@@ -66,13 +66,99 @@ Home
         </div>
         {% else %}
         <div class="d-flex align-items-center gap-3 px-2">
-            <a href="#" class="btn btn-outline-secondary">
-                <i class="bi bi-person"> LOGIN </i>
-            </a>
+            <button href="#" class="btn btn-outline-secondary " data-bs-toggle="modal" data-bs-target="#authModal">
+                SIGN IN
+            </button>
         </div>
         {% endif %}
     </div>
 </nav>
+
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-4">
+                <div class="auth-form active" id="signupForm">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex gap-2">
+                            <div class="modal-step active" data-step="1">1</div>
+                            <div class="modal-step" data-step="2">2</div>
+                            <div class="modal-step" data-step="3">3</div>
+                        </div>
+                    </div>
+                    <h2 class="fw-bold mb-2">Create an account 👋</h2>
+                    <p class="text-muted mb-4">You need to sign up to access this feature.</p>
+                    <form id="signupStepForm">
+                        <div class="step-content active" data-step="1">
+                            <div class="mb-3">
+                                <label for="signupEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="signupPassword" placeholder="********"
+                                    required>
+                            </div>
+                            <button type="button" class="btn btn-primary w-100 mb-3 next-step">Next</button>
+                        </div>
+                        <div class="step-content" data-step="2">
+                            <div class="mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName"
+                                    placeholder="Enter your first name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Enter your last name"
+                                    required>
+                            </div>
+                            <button type="button" class="btn btn-secondary w-100 mb-3 prev-step">Previous</button>
+                            <button type="button" class="btn btn-primary w-100 mb-3 next-step">Next</button>
+                        </div>
+                        <div class="step-content" data-step="3">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                                <label class="form-check-label" for="termsCheck">I agree to the terms of service</label>
+                            </div>
+                            <button type="button" class="btn btn-secondary w-100 mb-3 prev-step">Previous</button>
+                            <button type="submit" class="btn btn-primary w-100 mb-3">Sign up</button>
+                        </div>
+                    </form>
+                    <div class="text-center">
+                        <a href="#" id="showLoginForm" class="text-muted">Already have an account? Login</a>
+                    </div>
+                </div>
+                <div class="auth-form" id="loginForm">
+                    <h2 class="fw-bold mb-2">Welcome back 👋</h2>
+                    <p class="text-muted mb-4">Please login to your account</p>
+                    <form method="post" action="{% url 'login' %}">
+
+                        {% for message in messages %}
+                        message
+                        {% endfor %}
+
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email"
+                                required name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="********"
+                                required name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+                        <div class="text-center">
+                            <a href="#" id="showSignupForm" class="text-muted">Don't have an account? Sign up</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <section class="hero-section py-5">
     <div class="container">
@@ -91,7 +177,7 @@ Home
                 </div>
             </div>
             <div class="col-lg-6 mt-3" data-aos="fade-left">
-                <img src="/static/assets/img/pulpit.jpg" alt="Food delivery illustration" class="img-fluid rounded-3">
+                <img src="/static/assets/img/pulpit.jpg" class="img-fluid rounded-3">
             </div>
         </div>
     </div>
@@ -110,6 +196,8 @@ Home
         </div>
     </div>
 </div>
+
+
 
 <button class="theme-toggle" aria-label="Toggle theme">
     <i class="bi bi-sun-fill"></i>
