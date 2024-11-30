@@ -3,6 +3,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
+from django.http import JsonResponse
 # Create your views here.
 class Home(View):
 	def get(self, request):
@@ -10,27 +11,17 @@ class Home(View):
 
 # function based views
 def login(request):
-	if request.method == 'POST':
-		email = request.POST['email']
-		password = request.POST['password']
-		member = Member.objects.filter(email=email).first
-		if member is None:
-			messages.error(request, 'Invalid email ')
-			return redirect('home')
-		else:
-			member = authenticate(request, email=email, password=password)
-			if member is not None:
-				login(request, member)
-				messages.success(request, 'Login succesfull')
-				return redirect('home')
-			else:
-				messages.error(request, 'Invalid password')
-				return render(request, 'member/index.html')
-		# if member and member.password == password:
-		# 	login(request, member)
-		# 	messages.success(request, 'Login Success')
-		# 	return redirect(to='home')
-		
+	email = request.POST['email']
+	password = request.POST['password']
+	user = authenticate(request, email=email, password=password)
+	if user is not None:
+		login(request, user)
+		response_data = {'success': True, 'message': 'Login successful!'}
+
+	else:
+		messages.error(request, 'Invalid credentials')
+		response_data = {'success': False, 'message': 'Login Failed!'}
+	return JsonResponse(response_data)
 
 
 class About(View):

@@ -131,13 +131,8 @@ Home
                 </div>
                 <div class="auth-form" id="loginForm">
                     <h2 class="fw-bold mb-2">Welcome back 👋</h2>
-                    <p class="text-muted mb-4">Please login to your account</p>
-                    <form method="post" action="{% url 'login' %}">
-
-                        {% for message in messages %}
-                        message
-                        {% endfor %}
-
+                    <p class="text-muted mb-2" id="message">Please login to your account</p>
+                    <form method="post" action="{% url 'login' %}" id="actual-login-form">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="loginEmail" class="form-label">Email</label>
