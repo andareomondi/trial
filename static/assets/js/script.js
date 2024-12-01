@@ -2,31 +2,27 @@ AOS.init({
   duration: 1000,
   once: true,
 });
-// Theme toggling
-const themeToggle = document.querySelector(".theme-toggle");
-const html = document.documentElement;
-const themeIcon = themeToggle.querySelector("i");
-
-themeToggle.addEventListener("click", () => {
-  const currentTheme = html.getAttribute("data-bs-theme");
-  const newTheme = currentTheme === "dark" ? "light" : "dark";
-  html.setAttribute("data-bs-theme", newTheme);
-
-  // Update icon
-  themeIcon.className =
-    newTheme === "dark" ? "bi bi-moon-fill" : "bi bi-sun-fill";
-
-  // Save preference
-  localStorage.setItem("theme", newTheme);
+// Custom cursor
+const cursor = document.querySelector(".custom-cursor");
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
 });
 
-// Check for saved theme preference
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme) {
-  html.setAttribute("data-bs-theme", savedTheme);
-  themeIcon.className =
-    savedTheme === "dark" ? "bi bi-moon-fill" : "bi bi-sun-fill";
-}
+const backToTopButton = document.querySelector(".back-to-top");
+window.addEventListener("scroll", () => {
+  if (window.pageYOffset > 100) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+});
+
+backToTopButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
 const toastTrigger = document.getElementById("liveToastBtn");
 const toastLiveExample = document.getElementById("liveToast");
 
@@ -112,16 +108,14 @@ document.addEventListener("DOMContentLoaded", function () {
       success: function (response) {
         $("#message").text(response.message);
         if (response.success) {
-          $("#message").css("color", "green");
+          alert("Login successful!");
         } else {
-          $("#message").css("color", "red");
+          alert("Login failed!");
         }
       },
       error: function (xhr, status, error) {
         console.log("Error:", error); // Handle any errors
       },
     });
-
-    alert("Login successful!");
   });
 });

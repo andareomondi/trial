@@ -131,7 +131,7 @@ Home
                 </div>
                 <div class="auth-form" id="loginForm">
                     <h2 class="fw-bold mb-2">Welcome back 👋</h2>
-                    <p class="text-muted mb-2" id="message">Please login to your account</p>
+                    <p class="text-muted mb-2">Please login to your account</p>
                     <form method="post" action="{% url 'login' %}" id="actual-login-form">
                         {% csrf_token %}
                         <div class="mb-3">
@@ -177,8 +177,26 @@ Home
         </div>
     </div>
 </section>
-
-
+<section id="about" class="section">
+    <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-up">About Us</h2>
+        <div class="row">
+            <div class="col-md-6" data-aos="fade-right">
+                <p>Modern Church is a welcoming community dedicated to spreading love, hope, and faith. We believe in
+                    the power of togetherness and the strength of spiritual growth.</p>
+                <p>Our mission is to create a positive impact in our community and beyond, through worship, education,
+                    and outreach programs that touch lives and inspire change.</p>
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/your-video-id" title="Welcome to Modern Church"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
@@ -194,7 +212,6 @@ Home
 
 
 
-<button class="theme-toggle" aria-label="Toggle theme">
-    <i class="bi bi-sun-fill"></i>
-</button>
+<a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
+
 {% endblock content %}
