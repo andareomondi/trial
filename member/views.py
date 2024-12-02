@@ -5,11 +5,12 @@ from django.contrib import messages
 from .models import *
 from django.http import JsonResponse
 # Create your views here.
-class Home(View):
-	def get(self, request):
-		return render(request, 'member/index.html')
 
 # function based views
+def sign_out(request):
+	logout(request)
+	return redirect(to='home')
+
 def login(request):
 	email = request.POST['email']
 	password = request.POST['password']
@@ -23,6 +24,20 @@ def login(request):
 		response_data = {'success': False, 'message': 'Login Failed!'}
 	return JsonResponse(response_data)
 
+def contactform(request):
+	name = request.POST['name']
+	email = request.POST['email']
+	message = request.POST['message']
+	new_contact = ContactForm(name=name, email=email, message=message)
+	new_contact.save()
+	return redirect('home')
+
+	
+
+# closs based views 
+class Home(View):
+	def get(self, request):
+		return render(request, 'member/index.html')
 
 class About(View):
 	def get(self, request):
@@ -56,9 +71,6 @@ class Login(View):
 				messages.error(request, message="Incorrect password")
 				return render(request, "member/login.html")
 
-def sign_out(request):
-	logout(request)
-	return redirect(to='home')
 class Register(View):
 	def get(self, request):
 		if request.user.is_authenticated:

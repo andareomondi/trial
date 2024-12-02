@@ -165,9 +165,10 @@ Home
                 </div>
                 <h1 class="display-4 fw-bold mb-4">Discover the richness of God's presence.</h1>
                 <div class="search-bar mb-4">
-                    <input type="text" class="form-control form-control-lg pe-5" placeholder="Fell free to talk to us">
+                    <input type="text" class="form-control form-control-lg pe-5" id="chat" name="chat"
+                        placeholder="Fell free to talk to us">
                     <button class="btn btn-primary">
-                        <i class="bi bi-chat-dots" id="liveToastBtn"> Send</i>
+                        <i class="bi bi-messenger" id="liveToastBtn"></i>
                     </button>
                 </div>
             </div>
@@ -189,29 +190,110 @@ Home
             </div>
             <div class="col-md-6" data-aos="fade-left">
                 <div class="ratio ratio-16x9">
-                    <iframe src="https://www.youtube.com/embed/your-video-id" title="Welcome to Modern Church"
-                        allowfullscreen></iframe>
+                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/TutfDOIu7Qo"
+                        title="AIC MAVOKO CHOIR - ENYI WATU OFFICIAL MUSIC VIDEO." frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <hr>
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <strong class="me-auto">Macedonia</strong>
-            <small>now</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            Thanks you for chatting with us.God bless you
+<section class="section">
+    <div class="container">
+        <h2 class="section-title text-center">
+            Services
+        </h2>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4" data-aos="zoom-in">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-church feature-icon"></i>
+                        <h5 class="card-title">Sunday Worship</h5>
+                        <p class="card-text">Join us every Sunday at 10:00 AM for our main worship service.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h5 class="card-title">Youth Group</h5>
+                        <p class="card-text">Our youth group meets every Wednesday at 7:00 PM for fun and fellowship.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h5 class="card-title">Youth Group</h5>
+                        <p class="card-text">Our youth group meets every Wednesday at 7:00 PM for fun and fellowship.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+<hr>
+<section id="contact" class="section">
+    <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-up">Contact Us</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6 mb-2" data-aos="fade-right">
+                <form id="contact-form">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" required name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input name="email type=" email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea name="message" class="form-control" id="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+            <div class="col-md-4 mb-2 text-center" data-aos="fade-left">
+                <h4 style="text-decoration: underline;">Visit Us</h4>
+                <p>HXCJ+JQ4, Athi River<br>Machakos, Kenya</p>
+                <h4>Service Times</h4>
+                <p>Sunday: 10:00 AM<br>Wednesday: 7:00 PM</p>
+                <h4>Get in Touch</h4>
+                <p>Phone: +254 717 740400<br>Email: info@modernchurch.com</p>
+            </div>
+            <div class="col-md-6 mb-2" data-aos="fade-left">
+                <div class="ratio ratio-16x9 my-2">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.5783586964985!2d36.9819531!3d-1.4284875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f7546a677f7bd%3A0x9b5249eb8c361bf0!2sHXCJ%2BJQ4%2C%20Athi%20River!5e0!3m2!1sen!2ske!4v1727202931455!5m2!1sen!2ske"
+                        width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
+<footer class="bg-dark text-white">
+    <div class="container text-center">
+        <div class="social-icons mb-4">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>&copy; 2024 Aic Macedonia. All rights reserved.</p>
+    </div>
+</footer>
 
-<a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
 
 {% endblock content %}

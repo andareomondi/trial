@@ -3,9 +3,37 @@
   --secondary-color: #ff4d4d;
   --hover-bg: rgba(255, 0, 102, 0.1);
 }
+.card {
+  border-color: #ff0066;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(177, 5, 5, 0.027);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#map {
+  height: 300px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(184, 1, 1, 0.2);
+}
 .btn-primary {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+.feature-icon {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
 }
 body {
   font-family: "Roboto", sans-serif;
@@ -28,7 +56,22 @@ body {
 .section {
   padding: 80px 0;
 }
+.social-icons {
+  font-size: 1.5rem;
+}
 
+.social-icons a {
+  color: white;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: var(--secondary-color);
+}
+a:hover {
+  cursor: none;
+}
 .section-title {
   margin-bottom: 50px;
   color: var(--primary-color);

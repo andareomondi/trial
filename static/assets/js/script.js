@@ -26,9 +26,41 @@ backToTopButton.addEventListener("click", (e) => {
 const toastTrigger = document.getElementById("liveToastBtn");
 const toastLiveExample = document.getElementById("liveToast");
 
+const contactform = document.getElementById("contact-form");
+// Form submission
+document
+  .getElementById("contact-form")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+    // Add your form submission logic here
+    var name = contactform.elements["name"].value;
+    var email = contactform.elements["email"].value;
+    var message = contactform.elements["message"].value;
+    $.ajax({
+      url: "accounts/contactform/",
+      type: "POST",
+      data: {
+        name: name,
+        email: email,
+        message: message,
+        csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+      },
+    });
+    // alert("Thank you for your message. We will get back to you soon!");
+    // const toastBootstrap =
+    //   bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+    // toastBootstrap.show();
+    this.reset();
+  });
+
+chatfield = document.getElementById("chat");
+chat = chatfield.value;
+console.log(chat);
 if (toastTrigger) {
   const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
   toastTrigger.addEventListener("click", () => {
+    chatfield.value = "";
+
     toastBootstrap.show();
   });
 }
