@@ -1,0 +1,70 @@
+{% extends 'member/base.html' %}
+
+{% block title %}
+About
+{% endblock title %}
+
+
+{% block content %}
+<!-- story section -->
+<section class="about-section py-5" id="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2 class="section-title">Our Story</h2>
+        <p class="lead">Founded in 1970, Grace Community Church has been serving our community for over 50 years.</p>
+        <p>We are a welcoming congregation dedicated to spreading God's love through worship, fellowship, and service.
+        </p>
+        <div class="mt-4">
+          <h3>Our Values</h3>
+          <ul class="values-list">
+            <li><i class="bi bi-heart-fill"></i> Love and Compassion</li>
+            <li><i class="bi bi-people-fill"></i> Community Service</li>
+            <li><i class="bi bi-book-fill"></i> Biblical Teaching</li>
+            <li><i class="bi bi-house-heart-fill"></i> Family Focus</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="schedule-card">
+          <h3>Service Times</h3>
+          <ul class="list-unstyled">
+            <li><strong>Sunday Morning:</strong> 9:00 AM & 11:00 AM</li>
+            <li><strong>Wednesday Night:</strong> 7:00 PM</li>
+            <li><strong>Youth Group:</strong> Fridays at 6:30 PM</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- leaders section -->
+<hr>
+<section class="leaders-section py-5" id="leaders">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="section-title">Meet Our Leaders</h2>
+      </div>
+    </div>
+    <div class="row">
+
+      {% for leaders in leaders %}
+
+      <div class="col-sm-10 col-md-4 col lg-4">
+        <div class="card"><img src="{{leaders.profile_pic.url}}" alt="{{leaders.name}}">
+          <div class="card-body">
+            <h4>Name:
+              {{leaders.name}}
+            </h4>
+            <small class=" text-muted">Phone Number: 0{{leaders.number}}</small>
+            <p>{{leaders.department}} - {{leaders.specification}}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+</section>
+{% endblock content %}

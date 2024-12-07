@@ -15,6 +15,21 @@
   border-radius: 15px;
   overflow: hidden;
 }
+.schedule-card {
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(250, 18, 18, 0.925);
+  margin-top: 2rem;
+}
+
+.schedule-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.schedule-card li {
+  margin-bottom: 1rem;
+}
 .card:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 30px rgba(184, 1, 1, 0.2);
@@ -24,7 +39,21 @@
   border-color: var(--primary-color);
   transition: all 0.3s ease;
 }
+.values-list {
+  list-style: none;
+  padding: 0;
+}
 
+.values-list li {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.values-list i {
+  color: var(--primary-color);
+  margin-right: 1rem;
+}
 .btn-primary:hover {
   background-color: var(--secondary-color);
   border-color: var(--secondary-color);

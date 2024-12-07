@@ -128,9 +128,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Here you would typically send the form data to your server
     var email = actualLoginForm.elements["email"].value;
     var password = actualLoginForm.elements["password"].value;
-    console.log(password);
     $.ajax({
-      url: "accounts/login/", // Replace with your Django view URL
+      url: "hell/", // Replace with your Django view URL
       type: "POST",
       data: {
         password: password,
@@ -138,11 +137,10 @@ document.addEventListener("DOMContentLoaded", function () {
         csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(), // Include CSRF token
       },
       success: function (response) {
-        $("#message").text(response.message);
-        if (response.success) {
-          alert("Login successful!");
+        if (response.redirect) {
+          window.location.href = response.redirect;
         } else {
-          alert("Login failed!");
+          alert("Invalid credentials");
         }
       },
       error: function (xhr, status, error) {

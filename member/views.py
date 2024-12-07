@@ -3,7 +3,8 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.urls import reverse
 # Create your views here.
 
 # function based views
@@ -12,17 +13,47 @@ def sign_out(request):
 	return redirect(to='home')
 
 def login(request):
-	email = request.POST['email']
-	password = request.POST['password']
-	user = authenticate(request, email=email, password=password)
-	if user is not None:
-		login(request, user)
-		response_data = {'success': True, 'message': 'Login successful!'}
+	if request.method == 'POST':
+		email = request.POST['email']
+		password = request.POST['password']
+		user = authenticate(request, email=email, password=password)
+		print(email, password)
+		if user is not None:
+			login(request, user)
+			print('success')
+			return redirect(to='home')
+		else:
+			return redirect(to='about')
+		# if user is not None:
+		# 	login(request, user)
+		# 	# response_data = {'success': True, 'message': 'Login successful!'}
+		# 	return render(request, 'about.html')
 
-	else:
-		messages.error(request, 'Invalid credentials')
-		response_data = {'success': False, 'message': 'Login Failed!'}
-	return JsonResponse(response_data)
+		# else:
+		# 	messages.error(request, 'Invalid credentials')
+		# 	response_data = {'success': False, 'message': 'Login Failed!'}
+		# # return JsonResponse(response_data)
+		# return HttpResponse('thanks')
+
+class Hell(View):
+		def post(self, request, *args, **kwargs):
+			email = request.POST['email']
+			password = request.POST['password']
+			member = Member.objects.filter(email=email).first
+			if member is not None:
+				message = 'Email not found in the system'
+				return JsonResponse({'message': message})
+			else:
+				member = authenticate(email=email, password=password)
+				if member is not None:
+					# login(request, member)
+					print(f"Redirect URL: ")
+					redirect_url = reverse('home')
+					print(f"Redirect URL: {redirect_url}")
+					return JsonResponse({'redirect': redirect_url})
+				else:
+					message = 'Invalid credentials'
+					return JsonResponse({'message': message})
 
 def contactform(request):
 	name = request.POST['name']
@@ -32,20 +63,25 @@ def contactform(request):
 	new_contact.save()
 	return redirect('home')
 
-	
 
-# closs based views 
+
+# closs based views
 class Home(View):
 	def get(self, request):
 		return render(request, 'member/index.html')
 
 class About(View):
 	def get(self, request):
-		return render(request, 'member/about.html')
+		leaders = ChurchLeader.objects.all()
+		context = {
+			'leaders': leaders,
+		}
+		return render(request, 'member/about.html', context=context)
 	def post(self, request):
 		name = request.POST.get('name')
 		messages.success(request, message=f'Hi {name}, your issue has been recieved and it is being worked upon')
-		return render(request, 'member/about.html')		
+		return render(request, 'member/about.html')
+
 class History(View):
 	def get(self, request):
 		return render(request, 'member/history.html')

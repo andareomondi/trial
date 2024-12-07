@@ -32,9 +32,88 @@
             </div>
         </div>
     </div>
+    <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary py-3">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'assets/img/OIP.ico' %}" width="30" height="30" class="d-inline-block align-top"
+                    alt="Church Logo">
+                AIC Macedonia
+            </a>
+
+            {% if request.user.is_authenticated %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-grid-fill category-icon"></i>
+                            HOME
+                        </a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-cup-hot-fill category-icon"></i>
+                            BURGER
+                        </a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-cup-hot-fill category-icon"></i>
+                            COFFEE
+                        </a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-egg-fried category-icon"></i>
+                            FAST FOOD
+                        </a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-circle category-icon"></i>
+                            PIZZA
+                        </a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-flower1 category-icon"></i>
+                            SALAD
+                        </a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person"></i>
+                            PROFILE
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% else %}
+            <div class="d-flex align-items-center gap-3 px-2">
+                <button href="#" class="btn btn-outline-secondary " data-bs-toggle="modal" data-bs-target="#authModal">
+                    SIGN IN
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
     {% block content %}
 
     {% endblock content %}
+    <footer class="bg-dark text-white">
+        <div class="container text-center">
+            <div class="social-icons mb-4">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2024 Aic Macedonia. All rights reserved.</p>
+        </div>
+    </footer>
     <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
