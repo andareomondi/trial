@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.base_user import BaseUserManager
 # Create your models here.
 class MemberUserManager(BaseUserManager):
-    def create_user(self, first_name, second_name, email, phone_number, password=None):
+    def create_user(self, first_name, second_name, email, phone_number, password=None, address=None):
         if not email:
             raise ValueError('User should have an email')
         if not phone_number:
@@ -13,17 +13,19 @@ class MemberUserManager(BaseUserManager):
             second_name=second_name,
             email = email,
             phone_number=phone_number,
+            address=address,
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
-    def create_superuser(self, first_name, second_name, email, phone_number, password=None):
+    def create_superuser(self, first_name, second_name, email, phone_number, password=None, address=None):
         user = self.create_user(
             first_name=first_name,
             second_name=second_name,
             email=email,
             phone_number=phone_number,
             password=password,
+            address=address,
         )
         user.is_admin = True
         user.is_superuser = True
@@ -46,7 +48,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
 
     objects = MemberUserManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'second_name', 'phone_number']
+    REQUIRED_FIELDS = ['first_name', 'second_name', 'phone_number', 'address']
 
     def __str__(self):
         return f'{self.first_name} {self.second_name}'

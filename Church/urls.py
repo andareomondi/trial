@@ -20,9 +20,11 @@ from django.contrib import admin
 from django.urls import path, include
 from member.views import *
 from managment.views import *
+from member import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("register/", Register.as_view(), name="register"),
     path('', Home.as_view(), name='home'),
     path("about/", About.as_view(), name="about"),
     path("sermons/", Word.as_view(), name="sermon"),

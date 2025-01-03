@@ -3,63 +3,58 @@ from django.views import View
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
+from django.contrib import messages
 # Create your views here.
 
 # authentication views
+class Register(View):
+    def post(self, request):
+        first_name = request.POST.get('first_name')
+        second_name = request.POST.get('second_name')
+        email = request.POST.get('signupEmail')
+        phone_number = request.POST.get('phone_number')
+        password = request.POST.get('signupPassword')
+        residence = request.POST.get('residence')
+        profile_pic = request.POST.get('profile_pic')
+        print(first_name, second_name, phone_number, email, password, profile_pic)
+        try:
+            user = Member.objects.create_user(first_name=first_name, second_name=second_name, email=email, phone_number=phone_number, password=password)
+            user.save()
+            messages.success(request, 'Account creation succesful. Proceed to Login')
+            return redirect(to='login')
+        except:
+            messages.error(request, 'Email already in the system')
+            return render(request, 'member/authentication.html')
+
+
+
 class Login(View):
      def get(self, request):
          if request.user.is_authenticated:
              return redirect(to='home')
          else:
-             print(request.path)
              return render(request, 'member/authentication.html')
      def post(self, request):
-        user = Member()
-        username = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(request, email=username, password=password)
-        if user is not None:
-            login(request, user)
-            data = {
-                'redirect':'/',
-                'status': 'success',
-                'message': 'Login successful',
-            }
-            return JsonResponse(data)
-        else:
-            data = {
-                'status': 'error',
-                'message': 'Invalid login credentials'
-            }
-            return JsonResponse(data)
-
-class Register(View):
-     def post(self, request):
-        first_name = request.POST.get('firstname')
-        last_name = request.POST.get('lastname')
         email = request.POST.get('email')
-        phone_number = request.POST.get('phone')
         password = request.POST.get('password')
-        password2 = request.POST.get('password2')
-        if password != password2:
-            data = {
-                'status': 'error',
-                'message': 'Passwords do not match'
-            }
-            return JsonResponse(data)
+        member = Member.objects.filter(email=email).first()
+        if member is None:
+            messages.error(request, message="Email not found in the system")
+            return render(request, "member/authentication.html")
         else:
-            user = Member.objects.create_user(email=email, password=password, first_name=first_name, last_name=last_name, phone_number=phone_number)
-            user.save()
-            data = {
-                'redirect': '/',
-                'status': 'success',
-                'message': 'User registered successfully'
-            }
-            return JsonResponse(data)
+            member = authenticate(email=email, password=password)
+            if member is not None:
+                login(request, member)
+                messages.success(request, 'Login successful')
+                return redirect(to="home")
+            else:
+                messages.error(request, message="Incorrect password")
+                return render(request, "member/authentication.html")
 
 class SignOut(View):
     def get(self, request):
         logout(request)
+        messages.success( request, 'Goodbye')
         return redirect(to='home')
 
 # Important views handled here for the app
