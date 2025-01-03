@@ -1,0 +1,41 @@
+{% extends 'member/base.html' %}
+{% block title %}
+Sermon
+{% endblock title %}
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">Sermon summary</h2>
+    <div class="text-center border rounded-circle border-2 border-primary-subtle shadow p-4 p-lg-5"
+      data-bs-smooth-scroll="true" data-bs-target="#navcol-1">
+      <p class="fw-bold text-primary mb-2">{{word.book}}</p>
+      <h1 class="fw-bold mb-4">{{word.verse}}</h1>
+    </div>
+
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">Key Points</h2>
+    <div class="row">
+      <div class="col-sm-8 col-md-6 col-lg-4">
+
+        <div class="card">
+          <div class="card-body">
+            <ul>
+              {% for point in points %}
+              {{point.id}}. {{point.point}}<br />
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock content %}

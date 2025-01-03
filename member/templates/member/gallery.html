@@ -1,0 +1,62 @@
+{% extends 'member/base.html' %}
+{% block title %}
+Gallery
+{% endblock title %}
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">Videos</h2>
+    <div class="row justify-content-center">
+
+      {% for video in videos %}
+
+      <div class="col-sm-10 col-md-6 col-lg-4 text-center">
+        <p class="h4">Title: {{ video.title }}</>
+          <video src="{{ video.video.url }}" class="ratio ratio-16x9 mb-sm-2 mt-2" controls></video>
+      </div>
+      {% endfor %}
+      <div class="col-sm-10 col-md-6 col-lg-4 text-center">
+        <div class="ratio ratio-16x9 mx-2 my-2">
+          <iframe width="1013" height="570" src="https://www.youtube.com/embed/X7t4KtO6b90"
+            title="AIC MAVOKO CHOIR - WATAWAKAMATA OFFICIAL MUSIC VIDEO." frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="col-sm-10 col-md-6 col-lg-4 text-center">
+        <div class="ratio ratio-16x9 mx-2 my-2">
+          <iframe width="1013" height="570" src="https://www.youtube.com/embed/TutfDOIu7Qo?list=RDX7t4KtO6b90"
+            title="AIC MAVOKO CHOIR - ENYI WATU OFFICIAL MUSIC VIDEO." frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="col-sm-10 col-md-6 col-lg-4 text-center">
+        <div class="ratio ratio-16x9 mx-2 my-2">
+          <iframe width="1013" height="570" src="https://www.youtube.com/embed/OrDDYtcdxr0"
+            title="AIC MAVOKO CHOIR - TAFAKARI MPENDWA OFFICIAL MUSIC VIDEO." frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">Photos</h2>
+    <div class="row justify-content-center">
+
+      {% for image in images %}
+      <div class="col-sm-10 col-md-6 col-lg-4 mb-sm-3 text-center my-2">
+        <img src="{{ image.image.url }}" alt="{{ image.info }}" class="img-fluid shadow rounded">
+      </div>
+
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock content %}

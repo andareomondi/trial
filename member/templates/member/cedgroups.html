@@ -1,0 +1,50 @@
+{% extends 'member/base.html' %}
+{% block title %}
+CED Groups
+{% endblock title %}
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">What are C.E.D groups?</h2>
+    <p>Christian Education Department (C.E.D) is a department designed for educating peers on the key things that
+      affect them and how to manage them. Peers inconsiderate of the gender meet up and discuss their issues and help
+      each other out. Each group has a designated leader and pastor who leads and oversees the whole meetup.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">All C.E.D groups present</h2>
+
+    {% for group in groups %}
+
+    {% if group == '' %}
+    skfajkjsak
+    {% else %}
+
+    <div class="row justify-content-center">
+      <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="card text-center">
+          <div class="card-body">
+            <img src="{{ group.profile_pic.url }}" class="img-fluid rounded-top mb-2" alt="Service Image">
+            <h5 class="card-title mt-2 text-decoration-underline">{{group.name}}</h5>
+            <h6>Founded in: {{group.founding}}</h6>
+            <small>Led by: {{ group.leader }} ({{ group.leader_number}})</small>
+            <p class="card-text">{{group.short_description}}</p>
+
+          </div>
+          <div class="card-footer">
+            <a class="btn btn-primary" href="{% url 'specific-ced-group' pk=group.id %}">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+  </div>
+</section>
+
+
+
+{% endblock content %}

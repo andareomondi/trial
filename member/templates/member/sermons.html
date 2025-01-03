@@ -1,0 +1,36 @@
+{% extends 'member/base.html' %} {% load static %}
+{% block title %}
+Sermons
+{% endblock title %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% for word in words %}
+
+    {% if word == '' %}
+    <p class="text-center">There are no sermons uploaded yet. Coming soon!😁</p>
+    {% endif %}
+
+
+    <div class="col-sm-10 col-md-4 mb-4" data-aos="zoom-in">
+      <h2 class="section-title text-center">Sermons</h2>
+      <div class="card text-center">
+        <div class="card-body">
+          <img src="{% static 'img/ced.jpg' %}" class="img-fluid rounded-top mb-2" alt="Relatable sermon image" />
+          <h5 class="card-title mt-2 ">
+            <i class="fas fa-book-open    "></i> {{ word.book }}
+          </h5>
+          <p class="card-text">{{ word.description|truncatewords:25 }}</p>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-primary" href="{% url 'specific-sermon' pk=word.id %}">
+            Learn more
+          </a>
+          <!-- write htmx to get the more details on the sermon -->
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

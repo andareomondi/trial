@@ -1,33 +1,22 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect
 from django.views import View
-from member.models import Member
-from django.contrib import messages
+from member.models import *
 # Create your views here.
 class Dashboard(View):
-    def get(self, request):
-        if request.user.is_authenticated:
-            if request.user.is_superuser:
-                members = Member.objects.all()
-                memberscount = members.count()
-                context = {
-                    'members': members,
-                    'memberscount': memberscount,
-                }
-                return render(request,  'managment/dashboard.html', context=context)
-            else:
-                return redirect('home')
-        else:
-            return redirect('login')
-    def post(self, request):
-        member_id = request.POST.get('id')
-        member = Member.objects.get(id=member_id)
-        # print(member_id)
-        member.delete()
-        messages.success(request,  'Member deleted successfully')
+    def get(self, request,):
+      if (request.user.is_authenticated & request.user.is_superuser):
+
         members = Member.objects.all()
-        memberscount = members.count()
         context = {
-            'members': members,
-            'memberscount': memberscount,
+          'members': members,
         }
-        return render(request,  'managment/dashboard.html', context=context)
+        return render(request, 'managment/dashboard.html', context=context)
+      else:
+         return redirect(to='home')
+
+class SermonCreation(View):
+    def get(self, request):
+      return render(request, 'managment/sermon_form.html')
+
+    def post(self, request):
+      pass

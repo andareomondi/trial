@@ -7,7 +7,7 @@ class MemberUserManager(BaseUserManager):
         if not email:
             raise ValueError('User should have an email')
         if not phone_number:
-            raise ValueError('User should have an phone_number')        
+            raise ValueError('User should have an phone_number')
         user = self.model(
             first_name=first_name,
             second_name=second_name,
@@ -29,7 +29,7 @@ class MemberUserManager(BaseUserManager):
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
-           
+
 class Member(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=255)
     second_name = models.CharField(max_length=255)
@@ -38,7 +38,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
     created_on = models.DateTimeField(auto_now_add=True)
     last_login = models.DateField(auto_now=True)
     profile_pic = models.ImageField(blank=True, upload_to='personal_profile_images', null=True)
-    
+    address = models.CharField(blank=True, null=True, max_length=255, default='Jamcity')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
@@ -60,7 +60,12 @@ class ContactForm(models.Model):
         return f'{self.name} - {self.email}'
 
 class ChurchImage(models.Model):
+    info = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to='church-images')
+    def __str__(self):
+        return self.info
+
+
 class Choir(models.Model):
     name = models.CharField(max_length=50)
     short_description = models.CharField(max_length=255)
@@ -92,13 +97,14 @@ class ChoirPracticeDay(models.Model):
     stop = models.TimeField()
 
 class Sermon(models.Model):
-    image = models.ImageField(upload_to='sermon')
+    topic = models.CharField(max_length=255, blank=True, null=True)
+    video_link = models.CharField(max_length=255, blank=True, null=True)
     book = models.CharField(max_length=255)
     verse = models.CharField(max_length=500)
     description = models.TextField(max_length=5000)
     preacher = models.CharField(max_length=255, default='Justus Mutuku')
     preacher_number = models.CharField(max_length=30, default='0717740400')
-    preacher_profile_pic = models.ImageField(upload_to='preacher-profile-pics', default='static/assets/user.png')
+    preacher_profile_pic_url = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.book
@@ -113,7 +119,7 @@ class CedGroup(models.Model):
     founding = models.DateField()
     leader = models.CharField(max_length=100)
     leader_number = models.CharField(max_length=30)
-    leader_profile_pic = models.ImageField(default='static/assets/user-default.png', upload_to='leader-profile')    
+    leader_profile_pic = models.ImageField(default='static/assets/user-default.png', upload_to='leader-profile')
     short_description = models.CharField(max_length=255)
     long_description = models.TextField(max_length=5000)
     verse = models.CharField(max_length=255)

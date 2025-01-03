@@ -1,125 +1,151 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en" data-bs-theme="dark">
+{% load static %}
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aic Macedonia |
-        {% block title %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIC Macedonia |
+    {% block title %}
 
-        {% endblock title %}
-    </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
-    <link rel="shortcut icon" href="{% static 'assets/img/OIP.ico' %}" type="image/x-icon">
+    {% endblock title %}
+  </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="shortcut icon" href="{% static 'img/OIP.ico' %}" type="image/x-icon">
+  <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
 </head>
 
 <body>
-    <div class="custom-cursor"></div>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Macedonia</strong>
-                <small>now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                Thanks you for chatting with us.God bless you
-            </div>
-        </div>
+
+  <div class="custom-cursor"></div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Macedonia</strong>
+        <small>now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Thanks you for chatting with us.God bless you
+      </div>
     </div>
-    <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary py-3">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{% static 'assets/img/OIP.ico' %}" width="30" height="30" class="d-inline-block align-top"
-                    alt="Church Logo">
-                AIC Macedonia
+  </div>
+  <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary py-3">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'img/OIP.ico' %}" width="30" height="30" class="d-inline-block align-top" alt="Church Logo">
+        AIC Macedonia
+      </a>
+
+      {% if request.user.is_authenticated %}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+
+          {% if request.path == '/' %}
+          <li class="nav-item text-center">
+            <a class="nav-link active" href="{% url 'home' %}">
+              <i class="bi bi-grid-fill category-icon"></i>
+              HOME
             </a>
+          </li>
+          {% else %}
 
-            {% if request.user.is_authenticated %}
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+          <li class="nav-item text-center">
+            <a class="nav-link" href="{% url 'home' %}">
+              <i class="bi bi-grid-fill category-icon"></i>
+              HOME
+            </a>
+          </li>
+          {% endif %}
 
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-grid-fill category-icon"></i>
-                            HOME
-                        </a>
-                    </li>
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-cup-hot-fill category-icon"></i>
-                            BURGER
-                        </a>
-                    </li>
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-cup-hot-fill category-icon"></i>
-                            COFFEE
-                        </a>
-                    </li>
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-egg-fried category-icon"></i>
-                            FAST FOOD
-                        </a>
-                    </li>
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-circle category-icon"></i>
-                            PIZZA
-                        </a>
-                    </li>
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-flower1 category-icon"></i>
-                            SALAD
-                        </a>
-                    </li>
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-person"></i>
-                            PROFILE
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            {% else %}
-            <div class="d-flex align-items-center gap-3 px-2">
-                <button href="#" class="btn btn-outline-secondary " data-bs-toggle="modal" data-bs-target="#authModal">
-                    SIGN IN
-                </button>
-            </div>
-            {% endif %}
-        </div>
-    </nav>
-    {% block content %}
+          <li class="nav-item text-center">
+            <a class="nav-link" href="{% url 'sermon' %}">
+              <i class="bi bi-cup-hot-fill category-icon"></i>
+              SERMONS
+            </a>
+          </li>
+          <li class="nav-item text-center">
+            <a class="nav-link" href="{% url 'cedgroups' %}">
+              <i class="bi bi-cup-hot-fill category-icon"></i>
+              C.E.D GROUPS
+            </a>
+          </li>
+          <li class="nav-item text-center">
+            <a class="nav-link" href="{% url 'sundayschool' %}">
+              <i class="bi bi-egg-fried category-icon"></i>
+              SUNDAY SCHOOL
+            </a>
+          </li>
+          <li class="nav-item text-center">
+            <a class="nav-link" href="{% url 'choirs' %}">
+              <i class="bi bi-circle category-icon"></i>
+              CHOIRS
+            </a>
+          </li>
+          <li class="nav-item text-center">
+            <a class="nav-link" href="{% url 'gallery' %}">
+              <i class="bi bi-flower1 category-icon"></i>
+              CHURCH GALLERY
+            </a>
+          </li>
+          <li class="nav-item text-center">
+            <a class="nav-link" href="{% url 'Profile' pk=request.user.id %}">
+              <i class="bi bi-person"></i>
+              PROFILE
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex align-items-center gap-3 px-2">
+        <a href="{% url 'SignOut' %}" class="btn btn-outline-secondary ">
+          SIGN OUT
+        </a>
+      </div>
+      {% elif request.path == '/login/' %}
+      <div class="d-flex align-items-center gap-3 px-2">
+        <a href="{% url 'about' %}" class="btn btn-outline-secondary ">
+          ABOUT US
+        </a>
+      </div>
+      {% else %}
+      <div class="d-flex align-items-center gap-3 px-2">
+        <a href="{% url 'login' %}" class="btn btn-outline-secondary ">
+          SIGN UP
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </nav>
+  {% block content %}
 
-    {% endblock content %}
-    <footer class="bg-dark text-white">
-        <div class="container text-center">
-            <div class="social-icons mb-4">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            </div>
-            <p>&copy; 2024 Aic Macedonia. All rights reserved.</p>
-        </div>
-    </footer>
-    <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="{% static 'assets/js/script.js' %}">
-    </script>
+
+  {% endblock content %}
+  <footer class="bg-dark text-white">
+    <div class="container text-center">
+      <div class="social-icons mb-4">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+      <p>&copy; 2024 Aic Macedonia. All rights reserved.</p>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script> -->
+  <script src="{% static 'js/script.js' %}"></script>
 </body>
 
 </html>

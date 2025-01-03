@@ -1,70 +1,109 @@
 {% extends 'member/base.html' %}
-
+{% load static %}
 {% block title %}
 About
 {% endblock title %}
 
-
 {% block content %}
-<!-- story section -->
-<section class="about-section py-5" id="about">
+<div class="section">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
-        <h2 class="section-title">Our Story</h2>
-        <p class="lead">Founded in 1970, Grace Community Church has been serving our community for over 50 years.</p>
-        <p>We are a welcoming congregation dedicated to spreading God's love through worship, fellowship, and service.
-        </p>
-        <div class="mt-4">
-          <h3>Our Values</h3>
-          <ul class="values-list">
-            <li><i class="bi bi-heart-fill"></i> Love and Compassion</li>
-            <li><i class="bi bi-people-fill"></i> Community Service</li>
-            <li><i class="bi bi-book-fill"></i> Biblical Teaching</li>
-            <li><i class="bi bi-house-heart-fill"></i> Family Focus</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="schedule-card">
-          <h3>Service Times</h3>
-          <ul class="list-unstyled">
-            <li><strong>Sunday Morning:</strong> 9:00 AM & 11:00 AM</li>
-            <li><strong>Wednesday Night:</strong> 7:00 PM</li>
-            <li><strong>Youth Group:</strong> Fridays at 6:30 PM</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <h2 class="section-title">Sunday activities</h2>
+    <p>Below is a ordered list of all activities that occur in a normal sunday service.</p>
   </div>
-</section>
-<!-- leaders section -->
-<hr>
-<section class="leaders-section py-5" id="leaders">
+</div>
+<div class="section">
   <div class="container">
+    <h2 class="section-title">History</h2>
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <h2 class="section-title">Leaders</h2>
     <div class="row">
-      <div class="col-lg-12">
-        <h2 class="section-title">Meet Our Leaders</h2>
-      </div>
-    </div>
-    <div class="row">
+      <div class="col-md-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="card">
+          <div class="profile-image mt-3">
 
-      {% for leaders in leaders %}
-
-      <div class="col-sm-10 col-md-4 col lg-4">
-        <div class="card"><img src="{{leaders.profile_pic.url}}" alt="{{leaders.name}}">
-          <div class="card-body">
-            <h4>Name:
-              {{leaders.name}}
-            </h4>
-            <small class=" text-muted">Phone Number: 0{{leaders.number}}</small>
-            <p>{{leaders.department}} - {{leaders.specification}}</p>
+            <img src="{% static 'img/youth.jpg' %}" class="img-fluid" alt="Leader 2">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Leader 2</h5>
+            <p class="card-text">Associate Pastor</p>
+            <p class="card-text">Leader 2 is known for their inspiring sermons and community outreach programs.</p>
           </div>
         </div>
       </div>
-      {% endfor %}
+      <div class="col-md-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="card">
+          <div class="profile-image mt-3">
+
+            <img src="{% static 'img/youth.jpg' %}" class="img-fluid" alt="Leader 2">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Leader 2</h5>
+            <p class="card-text">Associate Pastor</p>
+            <p class="card-text">Leader 2 is known for their inspiring sermons and community outreach programs.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="card">
+          <div class="profile-image mt-3">
+
+            <img src="{% static 'img/youth.jpg' %}" class="img-fluid" alt="Leader 2">
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">Leader 2</h5>
+            <p class="card-text">Associate Pastor</p>
+            <p class="card-text">Leader 2 is known for their inspiring sermons and community outreach programs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title text-center" data-aos="fade-up">Contact Us</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6 mb-2" data-aos="fade-right">
+        <form id="contact-form">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" required name="name">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input name="email" type=" email" class="form-control" id="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea name="message" class="form-control" id="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+      <div class="col-md-4 mb-2 text-center" data-aos="fade-left">
+        <h4 style="text-decoration: underline;">Visit Us</h4>
+        <p>HXCJ+JQ4, Athi River<br>Machakos, Kenya</p>
+        <h4>Service Times</h4>
+        <p>Sunday: 10:00 AM<br>Wednesday: 7:00 PM</p>
+        <h4>Get in Touch</h4>
+        <p>Phone: +254 717 740400<br>Email: info@modernchurch.com</p>
+      </div>
+      <div class="col-md-6 mb-2" data-aos="fade-left">
+
+        <div class="ratio ratio-16x9 my-2">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.5783586964985!2d36.9819531!3d-1.4284875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f7546a677f7bd%3A0x9b5249eb8c361bf0!2sHXCJ%2BJQ4%2C%20Athi%20River!5e0!3m2!1sen!2ske!4v1727202931455!5m2!1sen!2ske"
+            width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
     </div>
   </div>
   </div>
 </section>
+
 {% endblock content %}

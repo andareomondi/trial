@@ -1,244 +1,180 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 from .models import *
-from django.http import JsonResponse, HttpResponse
-from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse
 # Create your views here.
 
-# function based views
-def sign_out(request):
-	logout(request)
-	return redirect(to='home')
-
-def login(request):
-	if request.method == 'POST':
-		email = request.POST['email']
-		password = request.POST['password']
-		user = authenticate(request, email=email, password=password)
-		print(email, password)
-		if user is not None:
-			login(request, user)
-			print('success')
-			return redirect(to='home')
-		else:
-			return redirect(to='about')
-		# if user is not None:
-		# 	login(request, user)
-		# 	# response_data = {'success': True, 'message': 'Login successful!'}
-		# 	return render(request, 'about.html')
-
-		# else:
-		# 	messages.error(request, 'Invalid credentials')
-		# 	response_data = {'success': False, 'message': 'Login Failed!'}
-		# # return JsonResponse(response_data)
-		# return HttpResponse('thanks')
-
-class Hell(View):
-		def post(self, request, *args, **kwargs):
-			email = request.POST['email']
-			password = request.POST['password']
-			member = Member.objects.filter(email=email).first
-			if member is not None:
-				message = 'Email not found in the system'
-				return JsonResponse({'message': message})
-			else:
-				member = authenticate(email=email, password=password)
-				if member is not None:
-					# login(request, member)
-					print(f"Redirect URL: ")
-					redirect_url = reverse('home')
-					print(f"Redirect URL: {redirect_url}")
-					return JsonResponse({'redirect': redirect_url})
-				else:
-					message = 'Invalid credentials'
-					return JsonResponse({'message': message})
-
-def contactform(request):
-	name = request.POST['name']
-	email = request.POST['email']
-	message = request.POST['message']
-	new_contact = ContactForm(name=name, email=email, message=message)
-	new_contact.save()
-	return redirect('home')
-
-
-
-# closs based views
-class Home(View):
-	def get(self, request):
-		return render(request, 'member/index.html')
-
-class About(View):
-	def get(self, request):
-		leaders = ChurchLeader.objects.all()
-		context = {
-			'leaders': leaders,
-		}
-		return render(request, 'member/about.html', context=context)
-	def post(self, request):
-		name = request.POST.get('name')
-		messages.success(request, message=f'Hi {name}, your issue has been recieved and it is being worked upon')
-		return render(request, 'member/about.html')
-
-class History(View):
-	def get(self, request):
-		return render(request, 'member/history.html')
+# authentication views
 class Login(View):
-	def get(self, request):
-		if request.user.is_authenticated:
-			return redirect(to='home')
-		else:
-			return render(request=request, template_name='member/login.html')
-	def post(self, request):
-		email = request.POST.get('email')
-		password = request.POST.get('password')
-		member = Member.objects.filter(email=email).first()
-		if member is None:
-			messages.error(request, message="Email not found in the system")
-			return render(request, "member/login.html")
-		else:
-			member = authenticate(email=email, password=password)
-			if member is not None:
-				login(request, member)
-				return redirect(to="home")
-			else:
-				messages.error(request, message="Incorrect password")
-				return render(request, "member/login.html")
+     def get(self, request):
+         if request.user.is_authenticated:
+             return redirect(to='home')
+         else:
+             print(request.path)
+             return render(request, 'member/authentication.html')
+     def post(self, request):
+        user = Member()
+        username = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=username, password=password)
+        if user is not None:
+            login(request, user)
+            data = {
+                'redirect':'/',
+                'status': 'success',
+                'message': 'Login successful',
+            }
+            return JsonResponse(data)
+        else:
+            data = {
+                'status': 'error',
+                'message': 'Invalid login credentials'
+            }
+            return JsonResponse(data)
 
 class Register(View):
-	def get(self, request):
-		if request.user.is_authenticated:
-			return redirect(to='home')
-		else:
-			return render(request, 'member/register.html')
-	def post(self, request):
-		first_name = request.POST.get('first_name')
-		second_name = request.POST.get('second_name')
-		email = request.POST.get('email')
-		phone_number = request.POST.get('phone_number')
-		password = request.POST.get('password')
-		password2 = request.POST.get('password2')
-		if password != password2:
-			messages.error(request, message='The passwords should be matching')
-			return render(request, template_name='member/register.html')
-		else:
-			try:
-				user = Member.objects.create_user(first_name=first_name, second_name=second_name, email=email, phone_number=phone_number, password=password)
-				user.save()
-				return redirect(to='login')
-			except:
-				messages.error(request, message='Email already in the system')
-				return render(request, template_name='member/register.html')
+     def post(self, request):
+        first_name = request.POST.get('firstname')
+        last_name = request.POST.get('lastname')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone')
+        password = request.POST.get('password')
+        password2 = request.POST.get('password2')
+        if password != password2:
+            data = {
+                'status': 'error',
+                'message': 'Passwords do not match'
+            }
+            return JsonResponse(data)
+        else:
+            user = Member.objects.create_user(email=email, password=password, first_name=first_name, last_name=last_name, phone_number=phone_number)
+            user.save()
+            data = {
+                'redirect': '/',
+                'status': 'success',
+                'message': 'User registered successfully'
+            }
+            return JsonResponse(data)
 
-class Profile(View):
-	def get(self, request, pk):
-		if request.user.is_authenticated:
-			user = Member.objects.get(id=pk)
-			context = {
-				'user': user,
-			}
-			return render(request, template_name='member/profile.html', context=context)
-		else:
-			return redirect(to='login')
-class ChurchGallery(View):
-	def get(self, request):
-		if request.user.is_authenticated:
-			images = ChurchImage.objects.all()
-			videos = Video.objects.all()
-			context = {
-				'images': images,
-				'videos': videos,
-		}
-			return render(request, 'member/churchpictures.html', context=context)
-		else:
-			return redirect(to='login')
-class Choirs(View):
-	def get(self, request):
-		if request.user.is_authenticated:
-			choirs = Choir.objects.all()
-			context = {
-				'choirs': choirs,
-			}
-			return render(request, 'member/choirs.html', context=context)
-		else:
-			return redirect(to='login')
+class SignOut(View):
+    def get(self, request):
+        logout(request)
+        return redirect(to='home')
 
-class SpecificChoir(View):
-	def get(self, request, pk):
-		if request.user.is_authenticated:
-			choir = Choir.objects.get(id=pk)
-			images = choir.choirimage_set.all()
-			practice = choir.choirpracticeday_set.all()
-			context = {
-				'choir': choir,
-				'images': images,
-				'practice': practice,
-			}
-			return render(request, 'member/choirmedia.html', context=context)
-		else:
-			return redirect(to='login')
-class SundaySchool(View):
-	def get(self, request):
-		if request.user.is_authenticated:
-			return render(request, 'member/sundayschool.html')
-		else:
-			return redirect(to='login')
+# Important views handled here for the app
+class Home(View):
+    def get(self, request):
+        return render(request, 'member/home.html')
+
+class About(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='member/about.html')
+
+# specific views for specific sections
 class Word(View):
 	def get(self, request):
-		words = Sermon.objects.all()
-		context = {
-			'words': words,
-		}
-		return render(request, 'member/semorns.html', context=context)
-class SermonPoints(View):
-	def get(self, request, pk):
-		word = Sermon.objects.get(id=pk)
-		points = word.point_set.all()
-		context = {
-			'word': word,
-			'points': points,
-		}
-		return render(request, 'member/more.html', context=context)
+          if request.user.is_authenticated:
+            words = Sermon.objects.all()
+            context = {
+                'words': words,
+            }
+            return render(request, 'member/sermons.html', context=context)
+          else:
+              return redirect(to='home')
 
-class CedGroups(View):
-	def get(self, request):
-		if request.user.is_authenticated:
-			cedgroups = CedGroup.objects.all()
-			context = {
-				'cedgroups': cedgroups,
-			}
-			return render(request, 'member/cedgroups.html', context=context)
-		else:
-			return redirect(to='login')
+class SpecificSermon(View):
+    def get(self, request, pk):
+        word = Sermon.objects.get(id=pk)
+        points = word.point_set.all()
+        context = {
+            'word': word,
+            'points': points
+        }
+        return render(request, 'member/specific-sermon.html', context = context)
 
-class SpecificCedGroup(View):
-	def get(self, request, pk):
-		if request.user.is_authenticated:
-			cedgroup = CedGroup.objects.get(id=pk)
-			practice = cedgroup.cedpracticeday_set.all()
-			context = {
-				'cedgroup': cedgroup,
-				'practice': practice,
-			}
-			return render(request, 'member/cedgroup.html', context=context)
-		else:
-			return redirect(to='login')
 class PrayerCells(View):
-	def get(self, request):
-		if request.user.is_authenticated:
-			return render(request, 'member/prayercells.html')
-		else:
-			return redirect(to='login')
-	def post(self, request):
-		name = request.POST.get('name')
-		messages.success(request, message=f'Hi {name}, your issue has been recieved and it is being worked upon')
-		return render(request, 'member/prayercells.html')
-class ChurchLeaders(View):
-	def get(self, request):
-		leaders = ChurchLeader.objects.all()
-		context = {
-			'leaders': leaders,
-		}
-		return render(request, 'member/churchleaders.html', context=context)
+     def get(self, request):
+          if request.user.is_authenticated:
+            return render(request, 'member/prayercells.html')
+          else:
+              return redirect(to='home')
+class Profile(View):
+        def get(self, request, pk):
+            if request.user.is_authenticated:
+                user = Member.objects.get(id=pk)
+                context = {
+                    'user': user,
+                }
+                return render(request, 'member/profile.html', context=context)
+            else:
+                return redirect(to='login')
+class Gallery(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            images = ChurchImage.objects.all()
+            videos = Video.objects.all()
+            context = {
+                'images':images,
+                'videos':videos,
+            }
+            return render(request, template_name='member/gallery.html', context=context)
+        else:
+            return redirect('home')
+
+class SundaySchool(View):
+     def get(self, request):
+          if request.user.is_authenticated:
+            return render(request, 'member/sundayschool.html')
+          else:
+              return redirect('home')
+
+class CEDGroups(View):
+     def get(self, request):
+          if request.user.is_authenticated:
+            groups = CedGroup.objects.all()
+            for group in groups:
+                print('haga' if group != '' else 'kichwa hii')
+            context = {
+                'groups': groups
+            }
+            return render(request, 'member/cedgroups.html', context = context)
+          else:
+              return redirect('home')
+class SpecificCedGroup(View):
+     def get(self, request, pk):
+        if request.user.is_authenticated:
+            group = CedGroup.objects.get(id=pk)
+            practice = group.cedpracticeday_set.all()
+            context = {
+                'cedgroup': group,
+                'practice': practice,
+            }
+            return render(request, 'member/cedgroup.html', context=context)
+        else:
+            return redirect('home')
+
+class Choirs(View):
+     def get(self, request):
+          if request.user.is_authenticated:
+            choirs  = Choir.objects.all()
+            context = {
+                'choirs': choirs
+            }
+            return render(request, 'member/choirs.html', context = context)
+          else:
+              return redirect('home')
+class SpecificChoir(View):
+     def get(self, request, pk):
+        if request.user.is_authenticated:
+            choir = Choir.objects.get(id=pk)
+            practice = choir.choirpracticeday_set.all()
+            images = choir.choirimage_set.all()
+            context = {
+                'choir': choir,
+                'images': images,
+                'practice': practice,
+            }
+            return render(request, 'member/specific_choir.html', context=context)
+        else:
+            return redirect('home')

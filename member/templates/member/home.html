@@ -1,0 +1,241 @@
+{% extends 'member/base.html' %}
+{% load static %}
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <i class="bi bi-geo-alt-fill text-primary"></i>
+          <span>Greatwall Athiriver</span>
+        </div>
+        <h1 class="display-4 fw-bold mb-4">Discover the richness of God's presence.</h1>
+        <div class="row justify-content-center">
+          <div class="col text-center">
+
+            {% if request.user.is_authenticated %}
+            <a class="btn btn-primary btn-lg" id="hero-button" href="{% url 'sermon' %}">Get
+              Started</a>
+            {% else %}
+            <a class="btn btn-primary btn-lg" id="hero-button" href="{% url 'login' %}">Get
+              Started</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mt-3" data-aos="fade-left">
+        <img src="{% static 'img/pulpit.jpg' %}" class="img-fluid rounded-3" alt="Pulpit Image">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="section-title text-center" data-aos="fade-up">About Us</h2>
+    <div class="row">
+      <div class="col-md-6" data-aos="fade-right">
+        <p>AIC Macedonia Church is a welcoming community dedicated to spreading love, hope, and faith. We believe in the
+          power
+          of togetherness and the strength of spiritual growth.</p>
+        <p>Our mission is to create a positive impact in our community and beyond, through worship, education, and
+          outreach programs that touch lives and inspire change.</p>
+        <div class="row justify-content center my-2">
+          <div class="col text-center">
+            <a name="about" id="about" class="btn btn-primary mb-2" href="{% url 'about' %}" role="button">Learn
+              more</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" data-aos="fade-left">
+        <div class="ratio ratio-16x9">
+          <iframe width="1280" height="720" src="https://www.youtube.com/embed/TutfDOIu7Qo"
+            title="AIC MAVOKO CHOIR - ENYI WATU OFFICIAL MUSIC VIDEO." frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+<!-- Mission and vision section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">Mission and Vision</h2>
+    <div class="row justify-content-center">
+      <div class="col-sm-10 col-md-8 col-lg-8 text-center">
+        <div class="accordion" id="missionVisionAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingMission">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMission"
+                aria-expanded="true" aria-controls="collapseMission">
+                Our Mission
+              </button>
+            </h2>
+            <div id="collapseMission" class="accordion-collapse collapse show" aria-labelledby="headingMission"
+              data-bs-parent="#missionVisionAccordion">
+              <div class="accordion-body">
+                AIC Macedonia is a Christian family committed in doing Christian reconstruction which involves creation
+                of mandates (Gen
+                1:26) and the great commission (Matt 28: 18)
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingVision">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseVision" aria-expanded="false" aria-controls="collapseVision">
+                Our Vision
+              </button>
+            </h2>
+            <div id="collapseVision" class="accordion-collapse collapse" aria-labelledby="headingVision"
+              data-bs-parent="#missionVisionAccordion">
+              <div class="accordion-body">Worship God in truth and in the Spirit (John 4:24)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+<!-- Services Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">Services</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-4 mb-4" data-aos="zoom-in">
+        <div class="card text-center">
+          <div class="card-body">
+            <img src="{% static 'img/jesus.jpg' %}" class="img-fluid rounded-top mb-2" alt="Service Image">
+            <h5 class="card-title mt-2 text-decoration-underline">Sunday Worship</h5>
+            <p class="card-text">Join us every Sunday at 10:00 AM for our main worship service and at 09:00 AM for the
+              early birds.</p>
+          </div>
+          <div class="card-footer">
+
+            {% if request.user.is_authenticated %}
+
+            <a href="{% url 'about' %}" class="btn btn-primary">Learn more</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary">Learn more</a>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="card text-center">
+          <div class="card-body">
+            <img src="{% static 'img/ced.jpg' %}" class="img-fluid rounded-top mb-2" alt="Service Image">
+            <h5 class="card-title mt-2 text-decoration-underline">C.E.D Groups</h5>
+            <p class="card-text">Wondering where you could meet your peers and discuss your issues? We got you covered
+              with peer groups</p>
+
+          </div>
+          <div class="card-footer">
+
+            {% if request.user.is_authenticated %}
+
+            <a class="btn btn-primary" href="{% url 'cedgroups' %}">Learn more</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary">Learn more</a>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="card text-center">
+          <div class="card-body">
+            <img src="{% static 'img/people.jpg' %}" class="img-fluid rounded-top mb-2" alt="Service Image">
+            <h5 class="card-title mt-2 text-decoration-underline">Choirs</h5>
+            <p class="card-text">The santuary is a place of praises and worship. The church has multiple choir groups
+              which aim to cater for the David's like dancing spirit of each person.</p>
+
+          </div>
+          <div class="card-footer">
+
+            {% if request.user.is_authenticated %}
+
+            <a class="btn btn-primary" href="{% url 'choirs' %}">Learn more</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary">Learn more</a>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="card text-center">
+          <div class="card-body">
+            <img src="{% static 'img/sunday.jpg' %}" class="img-fluid rounded-top mb-2" alt="Service Image">
+            <h5 class="card-title mt-2 text-decoration-underline">Sunday school</h5>
+            <p class="card-text">In our church we do believe in bringing up of a child in Christ hence Sunday school is
+              here to teach our kids the ways of our Lord Jesus Christ.</p>
+
+          </div>
+          <div class="card-footer">
+
+            {% if request.user.is_authenticated %}
+
+            <a class="btn btn-primary" href="{% url 'sundayschool' %}">Learn more</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary">Learn more</a>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="card text-center">
+          <div class="card-body">
+            <img src="{% static 'img/prayercell.jpg' %}" class="img-fluid rounded-top mb-2" alt="Service Image">
+            <h5 class="card-title mt-2 text-decoration-underline">Prayer cells</h5>
+            <p class="card-text">These are channels crafted to ensure that the ministry continues to reach you even if
+              you are unable to visit the santuary</p>
+
+          </div>
+          <div class="card-footer">
+
+            {% if request.user.is_authenticated %}
+
+            <a class="btn btn-primary" href="{% url 'prayers' %}">Learn more</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary">Learn more</a>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Location</h2>
+    <div class="row justify-content-center">
+      <div class="col col-sm-10 col-md-10 col-lg-10">
+        <div class="ratio ratio-16x9 my-2">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.5783586964985!2d36.9819531!3d-1.4284875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f7546a677f7bd%3A0x9b5249eb8c361bf0!2sHXCJ%2BJQ4%2C%20Athi%20River!5e0!3m2!1sen!2ske!4v1727202931455!5m2!1sen!2ske"
+            width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
