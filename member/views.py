@@ -104,6 +104,18 @@ class Profile(View):
                 return render(request, 'member/profile.html', context=context)
             else:
                 return redirect(to='login')
+        def post(self, request, pk):
+            user = Member.objects.get(id=pk)
+            address = request.POST.get('address')
+            print(address)
+            print(request.POST.get('address'))
+            user.address = request.POST.get('address')
+            user.save()
+            messages.success(request, 'Update succesful')
+            return render(request, 'member/profile.html')
+
+
+
 class Gallery(View):
     def get(self, request):
         if request.user.is_authenticated:

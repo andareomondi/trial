@@ -4,12 +4,8 @@ Sermons
 {% endblock title %}
 {% block content %}
 <div class="container">
-  <div class="row">
+  <div class="row" style="height: 80vh;">
     {% for word in words %}
-
-    {% if word == '' %}
-    <p class="text-center">There are no sermons uploaded yet. Coming soon!😁</p>
-    {% endif %}
 
 
     <div class="col-sm-10 col-md-4 mb-4" data-aos="zoom-in">
@@ -31,6 +27,7 @@ Sermons
       </div>
     </div>
     {% endfor %}
+    <div class="text-center mt-3">NB: There are no sermons uploaded yet! Coming soon 😁.</div>
   </div>
 </div>
 {% endblock content %}
