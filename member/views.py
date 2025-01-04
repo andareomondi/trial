@@ -65,6 +65,17 @@ class Home(View):
 class About(View):
     def get(self, request, *args, **kwargs):
         return render(request, template_name='member/about.html')
+    def post(self, request):
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        print(name, email, message)
+        contact_message = ContactForm.objects.create(name=name, email=email, message=message)
+        contact_message.save()
+        messages.success(request, f'Thank you {name} for your feedback. We promise to work on it.')
+
+        return render(request, 'member/about.html')
+
 
 # specific views for specific sections
 class Word(View):

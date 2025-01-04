@@ -1,0 +1,79 @@
+{% extends 'member/base.html' %} {% block content %}
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">Registered Members</h2>
+    <div class="row justify-content-center mt-1">
+      <div class="table-responsive">
+        <form method="post">
+          {% csrf_token %}
+          <table class="table p-3">
+            <thead>
+              <tr class="table-active">
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Residence</th>
+                <th scope="col">Action</th>
+                <th scope="col">Whatsapp</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {% for member in members %}
+              <tr>
+                <td>{{member.first_name}}</td>
+                <td>{{member.second_name}}</td>
+                <td>{{member.email}}</td>
+                <td>0{{member.phone_number}}</td>
+                <td>{{member.address}}</td>
+                <td><button value="{{member.id}}" type="submit" class="btn btn-danger" name="id" id="id">Delete</button>
+                </td>
+                <td><a class="btn btn-success" href="https://wa.me/254{{member.phone_number}}">Message</a></td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </form>
+        <div class="row justify-content-center mt-2">
+          <div class="col-sm-10 col-md-8 text-center">
+            <p class="display-6">Total Members = {{memberscount}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">Inquiries and Feedbacks</h2>
+    <div class="row justify-content-center mt-1">
+      <div class="table-responsive">
+        <table class="table p-3">
+          <thead>
+            <tr class="table-active">
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Message</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for member in inquiries %}
+            <tr>
+              <td>{{member.name}}</td>
+              <td>{{member.email}}</td>
+              <td>{{member.message}}</td>
+              <td>{{member.created_on}}</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
