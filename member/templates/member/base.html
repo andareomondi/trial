@@ -103,12 +103,12 @@
               PROFILE
             </a>
           </li>
+          <li class="nav-item text-center">
+            <a href="{% url 'SignOut' %}" class="btn btn-outline-secondary ">
+              SIGN OUT
+            </a>
+          </li>
         </ul>
-      </div>
-      <div class="d-flex align-items-center gap-3 px-2">
-        <a href="{% url 'SignOut' %}" class="btn btn-outline-secondary ">
-          SIGN OUT
-        </a>
       </div>
       {% elif request.path == '/login/' %}
       <div class="d-flex align-items-center gap-3 px-2">
