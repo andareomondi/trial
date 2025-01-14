@@ -7,7 +7,7 @@ class Dashboard(View):
     def get(self, request):
         if request.user.is_authenticated:
             if request.user.is_superuser:
-                inquiries = ContactForm.objects.all()
+                inquiries = ContactForm.objects.all().order_by('-created_on')
                 members = Member.objects.all()
                 memberscount = members.count()
                 context = {

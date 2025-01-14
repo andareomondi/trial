@@ -35,96 +35,7 @@
       </div>
     </div>
   </div>
-  <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary py-3">
-    <div class="container">
-      <a class="navbar-brand" href="{% url 'home' %}">
-        <img src="{% static 'img/OIP.ico' %}" width="30" height="30" class="d-inline-block align-top" alt="Church Logo">
-        AIC Macedonia
-      </a>
-
-      {% if request.user.is_authenticated %}
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav">
-
-          {% if request.path == '/' %}
-          <li class="nav-item text-center">
-            <a class="nav-link active" href="{% url 'home' %}">
-              <i class="bi bi-grid-fill category-icon"></i>
-              HOME
-            </a>
-          </li>
-          {% else %}
-
-          <li class="nav-item text-center">
-            <a class="nav-link" href="{% url 'home' %}">
-              <i class="bi bi-grid-fill category-icon"></i>
-              HOME
-            </a>
-          </li>
-          {% endif %}
-
-          <li class="nav-item text-center">
-            <a class="nav-link" href="{% url 'sermon' %}">
-              <i class="bi bi-journal-bookmark-fill"></i>
-              SERMONS
-            </a>
-          </li>
-          <li class="nav-item text-center">
-            <a class="nav-link" href="{% url 'cedgroups' %}">
-              <i class="bi bi-people-fill"></i>
-              C.E.D GROUPS
-            </a>
-          </li>
-          <li class="nav-item text-center">
-            <a class="nav-link" href="{% url 'sundayschool' %}">
-              <i class="bi bi-egg-fried category-icon"></i>
-              SUNDAY SCHOOL
-            </a>
-          </li>
-          <li class="nav-item text-center">
-            <a class="nav-link" href="{% url 'choirs' %}">
-              <i class="bi bi-circle category-icon"></i>
-              CHOIRS
-            </a>
-          </li>
-          <li class="nav-item text-center">
-            <a class="nav-link" href="{% url 'gallery' %}">
-              <i class="bi bi-collection-play"></i>
-              CHURCH GALLERY
-            </a>
-          </li>
-          <li class="nav-item text-center">
-            <a class="nav-link" href="{% url 'Profile' pk=request.user.id %}">
-              <i class="bi bi-person"></i>
-              PROFILE
-            </a>
-          </li>
-          <li class="nav-item text-center">
-            <a href="{% url 'SignOut' %}" class="btn btn-outline-secondary ">
-              SIGN OUT
-            </a>
-          </li>
-        </ul>
-      </div>
-      {% elif request.path == '/login/' %}
-      <div class="d-flex align-items-center gap-3 px-2">
-        <a href="{% url 'about' %}" class="btn btn-outline-secondary ">
-          ABOUT US
-        </a>
-      </div>
-      {% else %}
-      <div class="d-flex align-items-center gap-3 px-2">
-        <a href="{% url 'login' %}" class="btn btn-outline-secondary ">
-          SIGN UP
-        </a>
-      </div>
-      {% endif %}
-    </div>
-  </nav>
+  {% include 'member/navbar.html' %}
   {% for message in messages %}
   <div class="alert alert-success alert-dismissible fade show" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -144,7 +55,7 @@
         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         <a href="https://www.youtube.com/@aicmavokochurch7809" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
       </div>
-      <p>&copy; 2024 Aic Macedonia. All rights reserved.</p>
+      <p>&copy; 2025 Aic Macedonia. All rights reserved.</p>
     </div>
   </footer>
   <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>

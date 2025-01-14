@@ -1,0 +1,11 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "simple tour",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "Hey there thanks for checking out this tour. Without wasting much time let's get to the code. The essential this is learing on how to run the code and how to debug it. The code is ran through the code python manage.py runserver in the terminal. Each page is served by a view(either a class based view or function based view) which either handles a get or post request or both. The mother files of the project are in the church folder and debugging is done via the cli or the settings.py file."
+    }
+  ],
+  "ref": "main"
+}

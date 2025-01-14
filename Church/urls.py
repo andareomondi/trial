@@ -41,5 +41,6 @@ urlpatterns = [
     path("cedgroups/", CEDGroups.as_view(), name="cedgroups"),
     path("specific-ced-group/<int:pk>/", SpecificCedGroup.as_view(), name="specific-ced-group"),
     path("choirs/", Choirs.as_view(), name="choirs"),
+    path("recieve/", views.receive_data, name="recieve"),
     path("specific-choir/<int:pk>/", SpecificChoir.as_view(), name="specific-choir"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

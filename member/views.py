@@ -6,6 +6,25 @@ from django.http import JsonResponse
 from django.contrib import messages
 # Create your views here.
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt  # Disable CSRF protection for this view
+def receive_data(request):
+    if request.method == 'POST':
+        data = request.POST.dict()# Get all POST data as a dictionary
+        print('Received data:', data)
+        return JsonResponse({'status': 'success', 'received_data': data})
+    return JsonResponse({'status': 'failed', 'message': 'Invalid request method'})
+
+
+
+class Recieve(View):
+    def post(self, request):
+        data = request.POST.dict()  # Get all POST data as a dictionary
+        print('Received data:', data)
+        return JsonResponse({'status': 'success', 'received_data': data})
+        return JsonResponse({'status': 'failed', 'message': 'Invalid request method'})
 # authentication views
 class Register(View):
     def post(self, request):
